@@ -1,7 +1,12 @@
 package de.slothsoft.shera;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import de.slothsoft.shera.mapper.EnglishSoundMapper;
+import de.slothsoft.shera.mapper.GermanSoundMapper;
 
 /**
  * The {@link PhoneticSound}s are nice, but they only work for English. So this mapper
@@ -12,6 +17,13 @@ import java.util.Set;
  */
 
 public interface SoundMapper {
+
+	static List<SoundMapper> createAll() {
+		final List<SoundMapper> result = new ArrayList<>();
+		result.add(new EnglishSoundMapper());
+		result.add(new GermanSoundMapper());
+		return result;
+	}
 
 	/**
 	 * Returns all supported "letters" or syllables for this mapper. Elements must be

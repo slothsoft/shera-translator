@@ -10,6 +10,9 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import de.slothsoft.shera.dc.DrawingContext;
+import de.slothsoft.shera.dc.LogCanvas;
+
 @RunWith(Parameterized.class)
 public class PhoneticSoundTest {
 
@@ -29,7 +32,14 @@ public class PhoneticSoundTest {
 	}
 
 	@Test
-	public void testGetInfo() throws Exception {
-		Assert.assertNotNull(this.sound.getInfo());
+	public void testDrawOn() throws Exception {
+		Assert.assertNotNull(this.sound.drawOn(new DrawingContext(new LogCanvas())));
+	}
+
+	@Test
+	public void testGetDisplayName() throws Exception {
+		final String displayName = this.sound.getDisplayName();
+
+		Assert.assertNotNull(displayName);
 	}
 }

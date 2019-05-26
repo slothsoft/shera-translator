@@ -10,7 +10,7 @@ import de.slothsoft.shera.SoundMapper;
 
 public class GermanSoundMapperTest {
 
-	private final static String SPECIAL_LETTERS = "äöüß";
+	private final static String SPECIAL_LETTERS = "Ã¤Ã¶Ã¼ÃŸ";
 	private final static PhoneticSound[] SPECIAL_LETTERS_SOUNDS = {PhoneticSound.A, PhoneticSound.AY, PhoneticSound.EE,
 			PhoneticSound.S};
 
@@ -31,7 +31,7 @@ public class GermanSoundMapperTest {
 	public void testGetSupportedLettersNotSupported() throws Exception {
 		final Set<String> letters = this.mapper.getSupportedLetters();
 
-		Assert.assertFalse("Wrong set: " + letters, letters.contains("á"));
+		Assert.assertFalse("Wrong set: " + letters, letters.contains("ï¿½"));
 	}
 
 	@Test

@@ -1,112 +1,521 @@
 package de.slothsoft.shera;
 
-import java.io.IOException;
-import java.io.InputStream;
+import de.slothsoft.shera.dc.Canvas;
+import de.slothsoft.shera.dc.DrawingContext;
+import de.slothsoft.shera.dc.NextDrawing;
 
 /**
  * All the phonetic sounds the first ones writing has. See <a href=
  * "http://www.dreamworkstv.com/wp-content/uploads/2015/07/SheRa_FirstOnes_Language.pdf">Dreamworks
- * handy guide</a>.
+ * handy guide</a>. This class should only contain official information about the sounds
+ * and symbols.
  *
  * @author <a href="mailto:s.schulz@slothsoft.de">Stef Schulz</a>
  * @since 0.1.0
  */
 
 public enum PhoneticSound {
-	A("SAD", true),
 
-	AH("ALL", true),
+	// TODO: I calculated the point size as "partWidth" / "partHeight" alot
+	// maybe that's better of as an offset on #drawCenterPointOn
 
-	AY("SAY", true),
+	A("SAD", true) {
 
-	B,
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int partWidth = width / 5;
+			final int y = height / 2;
+			result.setStartPointX(width / 2 - partWidth);
 
-	CH,
+			canvas.drawLine(width / 2, 0, width / 2, y);
+			canvas.drawLine(width / 2, y, width / 2 - partWidth, y);
+			canvas.drawLine(width / 2 - partWidth, y, result.getStartPointX(), height);
+		}
 
-	D,
+	},
 
-	DH,
+	AH("ALL", true) {
 
-	E("PET", false),
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int partWidth = width / 5;
+			final int partHeight = height / 5;
+			final int y = (height - partHeight) / 2;
+			result.setStartPointX(width / 2 - partWidth);
 
-	EE("FEET", false),
+			canvas.drawLine(width / 2, 0, width / 2, y);
+			canvas.drawLine(width / 2, y, width / 2 - partWidth, y + partHeight);
+			canvas.drawLine(width / 2 - partWidth, y + partHeight, result.getStartPointX(), height);
+		}
 
-	F,
+	},
 
-	G,
+	AY("SAY", true) { // SEE AI, BOY
 
-	H,
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			final int oneThirdHeight = height / 3;
+			canvas.drawLine(halfWidth, 0, halfWidth, oneThirdHeight);
+			canvas.drawLine(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, halfHeight);
+			canvas.drawLine(halfWidth + halfWidth / 2, halfHeight, halfWidth, 2 * oneThirdHeight);
+			canvas.drawLine(halfWidth, 2 * oneThirdHeight, halfWidth, height);
+		}
 
-	I("LIT", false),
+	},
 
-	AI("I", true),
+	B { // see M, P
 
-	J,
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			P.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
 
-	K,
+	},
 
-	L,
+	CH { // see J
 
-	M,
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			canvas.drawTriangle(halfWidth, 0, halfWidth, height, 0, height);
+		}
 
-	N,
+	},
 
-	NG,
+	D { // see H, T
 
-	O("GOOD", true),
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.drawRectangle(0, 0, width, height);
+			drawCenterPointOn(canvas, width, height);
+		}
 
-	OO("TOO", false),
+	},
 
-	OW("GO", false),
+	DH { // see F, V
 
-	OU("HOUSE", true),
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			F.drawOn(canvas, width, height, result);
+			final int halfWidth = width / 2;
+			final int oneThirdWidth = width / 3;
+			canvas.drawLine(oneThirdWidth, 0, halfWidth, height);
+			canvas.drawLine(2 * oneThirdWidth, 0, halfWidth, height);
+		}
 
-	OY("BOY", true),
+	},
 
-	P,
+	E("PET", false) { // see TOO
 
-	R,
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
 
-	S,
+			canvas.drawOval(0, halfHeight / 2, halfWidth, 3 * halfHeight / 2);
+			canvas.drawOval(halfWidth, halfHeight / 2, width, 3 * halfHeight / 2);
 
-	SH,
+			// the triangle is to small, so draw connection myself
+			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			result.skipConnectionLine(true);
+		}
 
-	T,
+	},
 
-	TH,
+	EE("FEET", false) { // see N, GO
 
-	U("FUN", true),
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.drawOval(0, 0, width, height);
+		}
 
-	V,
+	},
 
-	W,
+	F { // see DH, V
 
-	Y("YES", true),
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			canvas.drawLine(0, 0, width, 0);
+			canvas.drawLine(width, 0, halfWidth, height);
+			canvas.drawLine(halfWidth, height, 0, 0);
+		}
 
-	Z,
+	},
 
-	ZH,;
+	G { // see K
 
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			K.drawOn(canvas, width, height, result);
+
+			final int partWidth = width / 5;
+			final int partHeight = height / 5;
+			final int x = (width - partWidth) / 2;
+			final int y = 2 * height / 3 - partHeight / 2;
+			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+		}
+
+	},
+
+	H { // see T, D
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.fillRectangle(0, 0, width, height);
+		}
+
+	},
+
+	I("LIT", false) { // see S
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int startX = width / 2;
+			canvas.fillTriangle(startX, 0, width, height, 0, height);
+		}
+
+	},
+
+	AI("I", true) { // see SAY
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			final int oneThirdHeight = height / 3;
+			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			canvas.fillTriangle(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, halfHeight, halfWidth,
+					2 * oneThirdHeight);
+		}
+
+	},
+
+	J { // see CH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			CH.drawOn(canvas, width, height, result);
+
+			final int partWidth = width / 5;
+			final int partHeight = height / 5;
+			final int x = 3 * partWidth / 2;
+			final int y = height - 2 * partHeight;
+			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+		}
+
+	},
+
+	K { // see G
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = 2 * height / 3;
+			canvas.drawLine(halfWidth, 0, width, halfHeight);
+			canvas.drawLine(width, halfHeight, halfWidth, height);
+			canvas.drawLine(halfWidth, height, 0, halfHeight);
+			canvas.drawLine(0, halfHeight, halfWidth, 0);
+		}
+
+	},
+
+	L { // see R
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int quarterWidth = width / 4;
+			canvas.drawLine(quarterWidth, 0, width, 0);
+			canvas.drawLine(width, 0, width - quarterWidth, height);
+			canvas.drawLine(width - quarterWidth, height, 0, height);
+			canvas.drawLine(0, height, quarterWidth, 0);
+		}
+
+	},
+
+	M { // see B, P
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			canvas.fillTriangle(halfWidth, 0, width, halfHeight, 0, halfWidth);
+			canvas.fillTriangle(halfWidth, height, 0, halfWidth, width, halfHeight);
+		}
+
+	},
+
+	N { // see FEET
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.fillOval(0, 0, width, height);
+		}
+
+	},
+
+	NG { // see SH, ZH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			canvas.fillTriangle(0, 0, width, 0, halfWidth, halfHeight);
+
+			// the triangle is to small, so draw connection myself
+			canvas.drawLine(halfWidth, halfHeight, halfWidth, height);
+			result.skipConnectionLine(true);
+		}
+
+	},
+
+	O("GOOD", true) {
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			canvas.drawLine(halfWidth, 0, halfWidth + halfWidth / 2, halfHeight);
+			canvas.drawLine(halfWidth + halfWidth / 2, halfHeight, halfWidth, height);
+		}
+
+	},
+
+	OO("TOO", false) { // see PET
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+
+			canvas.fillOval(0, halfHeight / 2, halfWidth, 3 * halfHeight / 2);
+			canvas.fillOval(halfWidth, halfHeight / 2, width, 3 * halfHeight / 2);
+
+			// the triangle is to small, so draw connection myself
+			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			result.skipConnectionLine(true);
+		}
+
+	},
+
+	OW("GO", false) { // see N, FEET
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			EE.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	OU("HOUSE", true) { // see FUN
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			U.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	OY("BOY", true) { // SEE AI, SAY
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			AY.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	P { // see B, M
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			canvas.drawLine(halfWidth, 0, width, halfHeight);
+			canvas.drawLine(width, halfHeight, halfWidth, height);
+			canvas.drawLine(halfWidth, height, 0, halfHeight);
+			canvas.drawLine(0, halfHeight, halfWidth, 0);
+		}
+
+	},
+
+	R { // see L
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			L.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	S { // see LIT, Z, TH, W
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int startX = width / 2;
+			canvas.drawTriangle(startX, 0, width, height, 0, height);
+		}
+
+	},
+
+	SH { // see NG, ZH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int halfHeight = height / 2;
+			canvas.drawTriangle(0, 0, width, 0, halfWidth, halfHeight);
+
+			// the triangle is to small, so draw connection myself
+			canvas.drawLine(halfWidth, halfHeight, halfWidth, height);
+			result.skipConnectionLine(true);
+		}
+
+	},
+
+	T { // see H, D
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.drawRectangle(0, 0, width, height);
+		}
+
+	},
+
+	TH { // see LIT, Z, S, W
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			S.drawOn(canvas, width, height, result);
+			final int halfWidth = width / 2;
+			final int oneThirdWidth = width / 3;
+			canvas.drawLine(oneThirdWidth, height, halfWidth, 0);
+			canvas.drawLine(2 * oneThirdWidth, height, halfWidth, 0);
+		}
+
+	},
+
+	U("FUN", true) { // see HOUSE
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int oneThirdHeight = height / 3;
+			canvas.drawLine(halfWidth, 0, halfWidth, oneThirdHeight);
+			canvas.drawLine(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, oneThirdHeight);
+			canvas.drawLine(halfWidth + halfWidth / 2, oneThirdHeight, halfWidth + halfWidth / 2, 2 * oneThirdHeight);
+			canvas.drawLine(halfWidth + halfWidth / 2, 2 * oneThirdHeight, halfWidth, 2 * oneThirdHeight);
+			canvas.drawLine(halfWidth, 2 * oneThirdHeight, halfWidth, height);
+		}
+
+	},
+
+	V { // see F, DH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			F.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	W { // see LIT, Z, S, TH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			S.drawOn(canvas, width, height, result);
+			final int halfWidth = width / 2;
+			canvas.drawLine(halfWidth, height, halfWidth, 0);
+		}
+
+	},
+
+	Y("YES", true) {
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			final int halfWidth = width / 2;
+			final int oneThirdHeight = height / 3;
+			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			canvas.fillRectangle(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, 2 * oneThirdHeight);
+		}
+
+	},
+
+	Z { // see LIT, S
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			S.drawOn(canvas, width, height, result);
+			drawCenterPointOn(canvas, width, height);
+		}
+
+	},
+
+	ZH { // see NG, SH
+
+		@Override
+		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			SH.drawOn(canvas, width, height, result);
+
+			final int partWidth = width / 5;
+			final int partHeight = height / 5;
+			final int x = (width - partWidth) / 2;
+			final int y = partHeight;
+			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+		}
+
+	},
+
+	;
+
+	private String example;
 	private boolean lineOnly;
-
-	private PhoneticSoundReader.Result info;
 
 	private PhoneticSound() {
 		this(null, false);
 	}
 
 	private PhoneticSound(String example, boolean lineOnly) {
+		this.example = example;
 		this.lineOnly = lineOnly;
 	}
 
-	PhoneticSoundReader.Result getInfo() {
-		if (this.info == null) {
-			try (InputStream input = getClass().getResourceAsStream("/" + name() + ".png")) {
-				this.info = new PhoneticSoundReader().readInputStream(input);
-			} catch (final IOException e) {
-				throw new IllegalArgumentException("Could not read image for " + name(), e);
-			}
-		}
-		return this.info;
+	public NextDrawing drawOn(DrawingContext dc) {
+		final NextDrawing result = dc.createNextDrawing();
+		// -1 because we start drawing with 0 TODO: find of if this is the correct place
+		drawOn(dc.getCanvas(), dc.getWidth() - 1, dc.getHeight() - 1, result);
+		return result;
+	}
+
+	// we need these values everywhere
+
+	@SuppressWarnings("unused")
+	abstract void drawOn(Canvas canvas, int width, int height, NextDrawing result);
+
+	// used by many symbols
+
+	protected static final void drawCenterPointOn(Canvas canvas, int width, int height) {
+		final int partWidth = width / 5;
+		final int partHeight = height / 5;
+		final int x = (width - partWidth) / 2;
+		final int y = (height - partHeight) / 2;
+		canvas.fillOval(x, y, x + partWidth, y + partHeight);
+	}
+
+	public String getDisplayName() {
+		return name();
+	}
+
+	public String getExample() {
+		return this.example;
 	}
 }

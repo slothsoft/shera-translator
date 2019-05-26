@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * This class splits
+ * This class splits words into approximate sounds.
  *
  * @author <a href="mailto:s.schulz@slothsoft.de">Stef Schulz</a>
  * @since 0.1.0
@@ -35,9 +35,9 @@ public class WordSpliterator {
 				if (substring.startsWith(supportedLetter)) {
 					// we know that letter(s)
 					for (final PhoneticSound sound : this.mapper.getSounds(supportedLetter)) {
-						index += supportedLetter.length();
 						result.add(sound);
 					}
+					index += supportedLetter.length();
 					foundLetter = true;
 					break;
 				}

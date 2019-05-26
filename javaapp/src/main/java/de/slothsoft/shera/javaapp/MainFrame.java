@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 
 import de.slothsoft.shera.PhoneticSound;
 import de.slothsoft.shera.WordSpliterator;
-import de.slothsoft.shera.mapper.EnglishSoundMapper;
 
 public class MainFrame extends JFrame {
 
@@ -16,6 +15,7 @@ public class MainFrame extends JFrame {
 	private final OutputControl outputControl = new OutputControl();
 
 	public MainFrame() {
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("She-Ra Translator");
 		createControls();
 		setSize(800, 400);
@@ -28,11 +28,12 @@ public class MainFrame extends JFrame {
 		add(this.inputControl);
 		add(this.outputControl);
 
+		this.inputControl.onModify(this::translate);
 		translate();
 	}
 
-	private void translate() {
-		final WordSpliterator spliterator = new WordSpliterator(new EnglishSoundMapper());
+	void translate() {
+		final WordSpliterator spliterator = new WordSpliterator(this.inputControl.getSelectedSoundMapper());
 		final PhoneticSound[] sounds = spliterator.split(this.inputControl.getContent());
 		this.outputControl.setContent(sounds);
 	}

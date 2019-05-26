@@ -22,10 +22,12 @@ public class GermanSoundMapper implements SoundMapper {
 	private final Map<String, PhoneticSound[]> multiMapping = new HashMap<>();
 
 	public GermanSoundMapper() {
-		addMapping("ä", PhoneticSound.A);
+		addMapping("Ã¤", PhoneticSound.A);
 		addMapping("aa", PhoneticSound.AH);
 		addMapping("ah", PhoneticSound.AH);
-		addMapping("ö", PhoneticSound.AY);
+		addMapping("Ã¶", PhoneticSound.AY);
+		addMapping("ee", PhoneticSound.AY);
+		addMapping("eh", PhoneticSound.AY);
 		addMapping("b", PhoneticSound.B);
 		addMapping("tsch", PhoneticSound.CH);
 		addMapping("d", PhoneticSound.D);
@@ -33,7 +35,7 @@ public class GermanSoundMapper implements SoundMapper {
 		addMapping("e", PhoneticSound.E);
 		addMapping("ie", PhoneticSound.EE);
 		addMapping("ih", PhoneticSound.EE);
-		addMapping("ü", PhoneticSound.EE);
+		addMapping("Ã¼", PhoneticSound.EE);
 		addMapping("f", PhoneticSound.F);
 		addMapping("g", PhoneticSound.G);
 		addMapping("h", PhoneticSound.H);
@@ -57,7 +59,7 @@ public class GermanSoundMapper implements SoundMapper {
 //		addMapping("?", PhoneticSound.OY);
 		addMapping("p", PhoneticSound.P);
 		addMapping("r", PhoneticSound.R);
-		addMapping("ß", PhoneticSound.S);
+		addMapping("ÃŸ", PhoneticSound.S);
 		addMapping("sch", PhoneticSound.SH);
 		addMapping("sh", PhoneticSound.SH); // "She-Ra"!
 		addMapping("t", PhoneticSound.T);

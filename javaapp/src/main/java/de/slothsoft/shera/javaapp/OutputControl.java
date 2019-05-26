@@ -1,12 +1,10 @@
 package de.slothsoft.shera.javaapp;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.util.Objects;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 import de.slothsoft.shera.PhoneticSound;
 
@@ -14,18 +12,19 @@ public class OutputControl extends JPanel {
 
 	private static final long serialVersionUID = -4836650964707954738L;
 
-	final JTextArea input = new JTextArea();
+	static final Color BACKGROUND = new Color(38, 33, 93);
+	static final Color FOREGROUND = Color.WHITE;
 
 	PhoneticSound[] content;
 
 	public OutputControl() {
+		setBackground(BACKGROUND);
 		setLayout(new FlowLayout());
-		add(this.input, BorderLayout.CENTER);
 	}
 
 	private void createControls() {
 		for (final PhoneticSound sound : this.content) {
-			add(new JLabel(sound.name()));
+			add(new PhoneticSoundControl(sound));
 		}
 	}
 
@@ -42,6 +41,8 @@ public class OutputControl extends JPanel {
 		this.content = Objects.requireNonNull(content);
 		removeAll();
 		createControls();
+		repaint();
+		doLayout();
 	}
 
 }
