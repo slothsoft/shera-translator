@@ -17,7 +17,7 @@ I actually wanted to try my hands at web development for this, but I slipped and
 
 The official sounds are implemented to look like this:
 
-![all sounds](https://github.com/slothsoft/shera-translator/master/readme/all-sounds.png)
+![all sounds](https://github.com/slothsoft/shera-translator/raw/master/readme/all-sounds.png)
 
 There are far from perfect and only a first draft created in a couple hours.
 
