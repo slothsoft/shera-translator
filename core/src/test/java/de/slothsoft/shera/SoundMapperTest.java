@@ -48,7 +48,7 @@ public class SoundMapperTest {
 		final WordSpliterator spliterator = new WordSpliterator(this.mapper);
 
 		for (final char c : ABC.toCharArray()) {
-			final PhoneticSound[] sounds = spliterator.split(String.valueOf(c).toUpperCase(this.mapper.getLocale()));
+			final PhoneticSound[] sounds = spliterator.split(String.valueOf(c).toUpperCase());
 
 			Assert.assertTrue(String.valueOf(c) + " is missing!", sounds.length > 0);
 		}

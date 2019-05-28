@@ -31,6 +31,11 @@ public class DefaultSoundMapper implements SoundMapper {
 	}
 
 	@Override
+	public String getDisplayName() {
+		return "Default";
+	}
+
+	@Override
 	public Set<String> getSupportedLetters() {
 		return this.mapping.keySet();
 	}

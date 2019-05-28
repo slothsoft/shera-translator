@@ -2,7 +2,6 @@ package de.slothsoft.shera.mapper;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -94,8 +93,8 @@ public class GermanSoundMapper implements SoundMapper {
 	}
 
 	@Override
-	public Locale getLocale() {
-		return Locale.GERMANY;
+	public String getDisplayName() {
+		return "Deutsch";
 	}
 
 	@Override

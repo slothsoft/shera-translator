@@ -30,6 +30,11 @@ public class EnglishSoundMapper implements SoundMapper {
 	}
 
 	@Override
+	public String getDisplayName() {
+		return "English";
+	}
+
+	@Override
 	public Set<String> getSupportedLetters() {
 		return this.mapping.keySet();
 	}

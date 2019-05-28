@@ -35,7 +35,8 @@ public class DrawingContext {
 	}
 
 	public void setCanvas(Canvas canvas) {
-		this.canvas = Objects.requireNonNull(canvas);
+		Objects.requireNonNull(canvas);
+		this.canvas = canvas;
 	}
 
 	public int getHeight() {

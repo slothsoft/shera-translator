@@ -2,7 +2,6 @@ package de.slothsoft.shera;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 
 import de.slothsoft.shera.mapper.EnglishSoundMapper;
@@ -44,12 +43,10 @@ public interface SoundMapper {
 	PhoneticSound[] getSounds(String letter);
 
 	/**
-	 * The locale of the sound mapper. Is English on default.
+	 * The display name of the sound mapper.
 	 *
-	 * @return a locale; never null
+	 * @return a display name; never null
 	 */
 
-	default Locale getLocale() {
-		return Locale.ENGLISH;
-	}
+	String getDisplayName();
 }

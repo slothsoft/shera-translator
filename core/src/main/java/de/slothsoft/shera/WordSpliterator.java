@@ -1,7 +1,6 @@
 package de.slothsoft.shera;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -19,11 +18,12 @@ public class WordSpliterator {
 	public WordSpliterator(SoundMapper mapper) {
 		this.mapper = mapper;
 		this.supportedLetters = new ArrayList<>(mapper.getSupportedLetters());
-		this.supportedLetters.sort(Comparator.comparingInt(String::length).reversed());
+		// this sorts by length of the letters (e.g. "sch" before "s" or "c")
+		this.supportedLetters.sort((o1, o2) -> o2.length() - o1.length());
 	}
 
 	public PhoneticSound[] split(String word) {
-		final String usedWord = word.toLowerCase(this.mapper.getLocale());
+		final String usedWord = word.toLowerCase();
 		final List<PhoneticSound> result = new ArrayList<>();
 
 		int index = 0;

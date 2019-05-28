@@ -119,7 +119,7 @@ public class InputControl extends JPanel {
 				boolean cellHasFocus) {
 			final JLabel result = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
 					cellHasFocus);
-			result.setText(((SoundMapper) value).getLocale().getDisplayLanguage());
+			result.setText(((SoundMapper) value).getDisplayName());
 			return result;
 		}
 	}
