@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<script src="bundle.js"></script>
+
+	<script>
+		function doMagic() {
+			var mapper = new de.slothsoft.shera.mapper.EnglishSoundMapper();
+			var spliterator = new de.slothsoft.shera.WordSpliterator(mapper);
+			
+			var string = "";
+
+			spliterator.split(document.getElementById("inputText").value).forEach(function(element) {
+				if (string.length > 0) {
+					string += "-";
+				}
+				string += de.slothsoft.shera.PhoneticSound[element];
+			});
+			
+			alert("Translation: " + string);
+		}
+	</script>
+
+	<h2>My First HTML Page</h2>
+
+	<input type="text" name="inputText" id="inputText" value="Shee-Rah" />
+	<input type="submit" value="Translate" onclick="doMagic()" />
+
+</body>
+</html>

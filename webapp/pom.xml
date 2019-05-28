@@ -1,0 +1,111 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>shera-webapp</artifactId>
+	<packaging>jar</packaging>
+
+	<parent>
+		<groupId>de.slothsoft.shera</groupId>
+		<artifactId>shera-build</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<generated-java-sources>target/generated-sources/java</generated-java-sources>
+		<generated-js-sources>target/generated-sources/js</generated-js-sources>
+		<webapp-folder>src/main/webapp</webapp-folder>
+	</properties>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jsweet-plugins-release</id>
+			<name>plugins-release</name>
+			<url>http://repository.jsweet.org/artifactory/plugins-release-local</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<sourceDirectory>${generated-java-sources}</sourceDirectory>
+
+		<plugins>
+
+			<!-- This plug-in copies the "core" library into this project because 
+				else the JavaScriptifaction cannot take please -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${generated-java-sources}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../core/src/main/java</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- This plug-in takes Java files and makes a big JavaScript file (with 
+				JavaDoc and everything) from them. It's stored in src/main/webapp/bundle.js -->
+
+			<plugin>
+				<groupId>org.jsweet</groupId>
+				<artifactId>jsweet-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<executions>
+					<execution>
+						<id>generate-js</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>jsweet</goal>
+						</goals>
+						<configuration>
+							<targetVersion>ES6</targetVersion>
+							<outDir>${webapp-folder}</outDir>
+							<sourceRoot>${generated-java-sources}/de</sourceRoot>
+							<bundle>true</bundle>
+							<declaration>false</declaration>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- This plug-in takes the big JavaScipt file from the webapp folder 
+				and minimizes it. -->
+
+			<!-- XXX: enable this or find other plug-in to minimize
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<executions>
+					<execution>
+						<id>default-minify</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+						<configuration>        
+        					<jsSourceDir>/</jsSourceDir>
+							<jsSourceFiles>
+								<jsSourceFile>bundle.js</jsSourceFile>
+							</jsSourceFiles>
+							<jsFinalFile>${generated-js-sources}/bundle.js</jsFinalFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			 -->
+		</plugins>
+	</build>
+</project>
