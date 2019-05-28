@@ -71,6 +71,7 @@ public class GermanSoundMapper implements SoundMapper {
 		addMapping("s", PhoneticSound.Z);
 //		addMapping("?", PhoneticSound.ZH);
 
+		addMultiMapping("qu", PhoneticSound.K, PhoneticSound.V);
 		addMultiMapping("st", PhoneticSound.SH, PhoneticSound.T);
 		addMultiMapping("sp", PhoneticSound.SH, PhoneticSound.P);
 		addMultiMapping("x", PhoneticSound.K, PhoneticSound.S);

@@ -26,7 +26,9 @@ public class EnglishSoundMapper implements SoundMapper {
 		// these are missing, so I'm approximating them
 		this.mapping.put("c", PhoneticSound.K);
 		this.mapping.put("q", PhoneticSound.K);
-		this.mapping.put("x", null); // the only multi sound letter
+		// the only multi sound letters
+		this.mapping.put("x", null);
+		this.mapping.put("qu", null);
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class EnglishSoundMapper implements SoundMapper {
 
 	@Override
 	public PhoneticSound[] getSounds(String letter) {
+		if ("qu".equals(letter)) return new PhoneticSound[]{PhoneticSound.K, PhoneticSound.W};
 		if ("x".equals(letter)) return new PhoneticSound[]{PhoneticSound.K, PhoneticSound.S};
 		return new PhoneticSound[]{this.mapping.get(letter)};
 	}

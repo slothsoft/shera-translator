@@ -25,18 +25,12 @@ public class PhoneticSoundImage extends JLabel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		try {
-			g.setColor(getBackground());
-			g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(getBackground());
+		g.fillRect(0, 0, getWidth(), getHeight());
 
-			if (this.content != null) {
-				g.setColor(getForeground());
-				this.content
-						.drawOn(new DrawingContext(new SwingCanvas(g)).height(this.symbolSize).width(this.symbolSize));
-			}
-		} catch (final Exception e) {
-			// XXX: remove this when every letter is implemented
-			System.out.println(e.getMessage());
+		if (this.content != null) {
+			g.setColor(getForeground());
+			this.content.drawOn(new DrawingContext(new SwingCanvas(g)).height(this.symbolSize).width(this.symbolSize));
 		}
 	}
 
