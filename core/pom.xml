@@ -31,7 +31,7 @@
 				<executions>
 					<execution>
 						<id>generate-js</id>
-						<phase>package</phase>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>jsweet</goal>
 						</goals>
