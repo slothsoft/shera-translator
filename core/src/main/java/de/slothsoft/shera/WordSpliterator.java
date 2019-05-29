@@ -50,9 +50,4 @@ public class WordSpliterator {
 		return result.toArray(new PhoneticSound[result.size()]);
 	}
 
-	public SoundGrouping group(PhoneticSound[] sounds) {
-
-		return null;
-	}
-
 }
