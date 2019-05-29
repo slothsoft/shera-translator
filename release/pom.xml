@@ -71,10 +71,9 @@
 							<outputDirectory>${release-folder}/webapp</outputDirectory>
 							<resources>
 								<resource>
-									<directory>../webapp/src/main/webapp</directory>
+									<directory>../webapp/target/${finished-js-folder}</directory>
 									<includes>
-										<include>**/*.js</include>
-										<include>**/*.html</include>
+										<include>**/*</include>
 									</includes>
 									<exclude>.tsc-rootfile.js</exclude>
 								</resource>

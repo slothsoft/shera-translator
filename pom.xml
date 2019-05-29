@@ -21,6 +21,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<runnable-jar-name>shera-translator-${project.version}</runnable-jar-name>
+		<finished-js-folder>shera-webapp</finished-js-folder>
 	</properties>
 
 	<pluginRepositories>
@@ -83,6 +84,11 @@
 					<groupId>com.ruleoftech</groupId>
 					<artifactId>markdown-page-generator-plugin</artifactId>
 					<version>2.1.0</version>
+				</plugin>
+				<plugin>
+					<groupId>com.samaxes.maven</groupId>
+					<artifactId>minify-maven-plugin</artifactId>
+					<version>1.7.6</version>
 				</plugin>
 
 				<plugin>

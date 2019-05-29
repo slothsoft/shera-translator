@@ -62,7 +62,6 @@
 			<plugin>
 				<groupId>com.samaxes.maven</groupId>
 				<artifactId>minify-maven-plugin</artifactId>
-				<version>1.7.6</version>
 				<executions>
 					<execution>
 						<id>default-minify</id>
@@ -71,15 +70,41 @@
 							<charset>UTF-8</charset>
 							<cssSourceDir>css</cssSourceDir>
 							<jsSourceDir>/</jsSourceDir>
-							<jsSourceFiles>
-								<jsSourceFile>bundle.js</jsSourceFile>
-							</jsSourceFiles>
-							<jsFinalFile>bundle.js</jsFinalFile>
+							<jsIncludes>**/*.js</jsIncludes>
+							<webappTargetDir>${project.build.directory}/${finished-js-folder}</webappTargetDir>
+							<nosuffix>true</nosuffix>
+							<skipMerge>true</skipMerge>
 							<jsEngine>CLOSURE</jsEngine>
 						</configuration>
 						<goals>
 							<goal>minify</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- Copy the HTML page in the webapp folder -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-html</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/${finished-js-folder}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/webapp</directory>
+									<includes>
+										<include>**/*.html</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
