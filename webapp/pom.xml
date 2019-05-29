@@ -21,18 +21,17 @@
 	<build>
 		<sourceDirectory>src/main/webapp</sourceDirectory>
 
+
 		<plugins>
+		
+			<!-- Didn't work, so I gave up =/
 			<plugin>
 				<groupId>com.github.searls</groupId>
 				<artifactId>jasmine-maven-plugin</artifactId>
 				<executions>
 					<execution>
 						<goals>
-							<goal>generateManualRunner</goal>
-							<goal>resources</goal>
-							<goal>testResources</goal>
 							<goal>test</goal>
-							<goal>preparePackage</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -42,19 +41,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
+			-->
 
 			<!-- This plug-in takes the big JavaScipt file from the webapp folder 
 				and minimizes it. -->

@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html>
+<head>
+<meta charset="utf-8">
+<title>She-Ra First Ones Translator</title>
+<script src="bundle.js"></script>
+<script src="lib/commons.js"></script>
+<script src="lib/html-canvas.js" defer></script>
+<script src="lib/phonetic-sound.js" defer></script>
+</head>
 <body>
-
-	<script src="bundle.js"></script>
 
 	<script>
 		function doMagic() {
+			
+			// clean the div
+			
+			var myNode = document.getElementById("result");
+			while (myNode.firstChild) {
+			    myNode.removeChild(myNode.firstChild);
+			}
+			
+			// use generated JS to translate
+			
 			var mapper = new de.slothsoft.shera.mapper.EnglishSoundMapper();
 			var spliterator = new de.slothsoft.shera.WordSpliterator(mapper);
-			
-			var string = "";
 
-			spliterator.split(document.getElementById("inputText").value).forEach(function(element) {
-				if (string.length > 0) {
-					string += "-";
-				}
-				string += de.slothsoft.shera.PhoneticSound[element];
-			});
+			// generate new elements for each sound
 			
-			alert("Translation: " + string);
+			spliterator.split(document.getElementById("inputText").value)
+					.forEach(function(element) {
+						var soundTemplate = document.createElement("phonetic-sound");
+						soundTemplate.initFromSound(element);
+						document.getElementById("result").appendChild(soundTemplate);
+						
+					});
 		}
 	</script>
 
-	<h2>My First HTML Page</h2>
+	<h2>She-Ra First Ones Translator</h2>
 
 	<input type="text" name="inputText" id="inputText" value="Shee-Rah" />
 	<input type="submit" value="Translate" onclick="doMagic()" />
+	
+	<div id="result"> 
+	
+	</div>
 
 </body>
 </html>
