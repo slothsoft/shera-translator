@@ -1,0 +1,180 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>shera-release</artifactId>
+	<packaging>pom</packaging>
+
+	<description>This project is just for creating a beautiful ZIP file with the JAR, the webapp and possibly a README file. Let's see how that goes...</description>
+
+
+	<parent>
+		<groupId>de.slothsoft.shera</groupId>
+		<artifactId>shera-build</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<release-folder>target/release</release-folder>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.slothsoft.shera</groupId>
+			<artifactId>shera-javaapp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>de.slothsoft.shera</groupId>
+			<artifactId>shera-webapp</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- Copy the runnable JAR over so we can put it into the ZIP -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-javaapp</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${release-folder}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../javaapp/target/</directory>
+									<include>${runnable-jar-name}.jar</include>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Copy the webapp over there so we can ZIP it -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-webapp</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${release-folder}/webapp</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../webapp/src/main/webapp</directory>
+									<includes>
+										<include>**/*.js</include>
+										<include>**/*.html</include>
+									</includes>
+									<exclude>.tsc-rootfile.js</exclude>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Copy the LICENSE file -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-license</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${release-folder}/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../</directory>
+									<includes>
+										<include>LICENSE</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- And now we get the HTML Readme file and put it in there too -->
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-readme</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../</directory>
+									<includes>
+										<include>README.md</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>com.ruleoftech</groupId>
+				<artifactId>markdown-page-generator-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputDirectory>${project.build.directory}/</inputDirectory>
+							<outputDirectory>${release-folder}/</outputDirectory>
+							<headerHtmlFile>${basedir}/header.html</headerHtmlFile>
+							<footerHtmlFile>${basedir}/footer.html</footerHtmlFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Now that we have everything, create a ZIP file -->
+
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptors>
+						<descriptor>zip.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
