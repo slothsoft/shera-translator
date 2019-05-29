@@ -17,4 +17,33 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+		
+			<!-- This plug-in takes Java files and makes a big JavaScript file (with 
+				JavaDoc and everything) from them. It's stored in the webapp (because it's 
+				needed there) -->
+
+			<plugin>
+				<groupId>org.jsweet</groupId>
+				<artifactId>jsweet-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>generate-js</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jsweet</goal>
+						</goals>
+						<configuration>
+							<targetVersion>ES6</targetVersion>
+							<outDir>../webapp/src/main/webapp</outDir>
+							<bundle>true</bundle>
+							<declaration>false</declaration>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

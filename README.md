@@ -36,6 +36,17 @@ I don't speak any other languages so if anyone wants to create another mapping, 
 
 
 
+## Release
+
+The release contains the following files and folders:
+
+- *webapp/* - all the files necessary to run this project on a web server
+- *LICENSE* - the license
+- *README.html* - this file as HTML
+- *shera-translator.jar* - the Java application as runnable JAR (if you have Java installed)
+
+
+
 ## License
 
 This project is licensed under the MIT License - see the [MIT license](https://opensource.org/licenses/MIT) for details.

@@ -22,6 +22,14 @@
 
 		<runnable-jar-name>shera-translator-${project.version}</runnable-jar-name>
 	</properties>
+	
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jsweet-plugins-release</id>
+			<name>plugins-release</name>
+			<url>http://repository.jsweet.org/artifactory/plugins-release-local</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<dependencyManagement>
 		<dependencies>
