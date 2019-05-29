@@ -22,7 +22,7 @@
 
 		<runnable-jar-name>shera-translator-${project.version}</runnable-jar-name>
 	</properties>
-	
+
 	<pluginRepositories>
 		<pluginRepository>
 			<id>jsweet-plugins-release</id>
@@ -66,16 +66,30 @@
 					<version>2.6</version>
 				</plugin>
 				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+				</plugin>
+				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
 					<version>3.1.0</version>
 				</plugin>
 
+				<plugin>
+					<groupId>com.github.searls</groupId>
+					<artifactId>jasmine-maven-plugin</artifactId>
+					<version>1.0.1-beta-6</version>
+				</plugin>
 				<plugin>
 					<groupId>com.ruleoftech</groupId>
 					<artifactId>markdown-page-generator-plugin</artifactId>
 					<version>2.1.0</version>
 				</plugin>
 
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.1.0</version>
+				</plugin>
 				<plugin>
 					<groupId>org.jsweet</groupId>
 					<artifactId>jsweet-maven-plugin</artifactId>

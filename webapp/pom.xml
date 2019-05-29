@@ -22,15 +22,67 @@
 		<sourceDirectory>src/main/webapp</sourceDirectory>
 
 		<plugins>
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generateManualRunner</goal>
+							<goal>resources</goal>
+							<goal>testResources</goal>
+							<goal>test</goal>
+							<goal>preparePackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jsSrcDir>src/main/webapp/lib</jsSrcDir>
+					<jsTestSrcDir>src/test/webapp/lib</jsTestSrcDir>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
 			<!-- This plug-in takes the big JavaScipt file from the webapp folder 
 				and minimizes it. -->
 
-			<!-- XXX: enable this or find other plug-in to minimize <plugin> <groupId>com.samaxes.maven</groupId> 
-				<artifactId>minify-maven-plugin</artifactId> <version>1.7.6</version> <executions> 
-				<execution> <id>default-minify</id> <phase>generate-sources</phase> <goals> 
-				<goal>minify</goal> </goals> <configuration> <jsSourceDir>/</jsSourceDir> 
-				<jsSourceFiles> <jsSourceFile>bundle.js</jsSourceFile> </jsSourceFiles> <jsFinalFile>${generated-js-sources}/bundle.js</jsFinalFile> 
-				</configuration> </execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>com.samaxes.maven</groupId>
+				<artifactId>minify-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<executions>
+					<execution>
+						<id>default-minify</id>
+						<phase>package</phase>
+						<configuration>
+							<charset>UTF-8</charset>
+							<cssSourceDir>css</cssSourceDir>
+							<jsSourceDir>/</jsSourceDir>
+							<jsSourceFiles>
+								<jsSourceFile>bundle.js</jsSourceFile>
+							</jsSourceFiles>
+							<jsFinalFile>bundle.js</jsFinalFile>
+							<jsEngine>CLOSURE</jsEngine>
+						</configuration>
+						<goals>
+							<goal>minify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
