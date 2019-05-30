@@ -53,14 +53,9 @@
 							</resources>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
 
-			<!-- Copy the webapp over there so we can ZIP it -->
+					<!-- Copy the webapp over there so we can ZIP it -->
 
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
 					<execution>
 						<id>copy-webapp</id>
 						<phase>package</phase>
@@ -80,14 +75,9 @@
 							</resources>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- Copy the LICENSE file -->
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
+					
+					<!-- Copy the LICENSE file -->
+					
 					<execution>
 						<id>copy-license</id>
 						<phase>package</phase>
@@ -106,14 +96,9 @@
 							</resources>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-
-			<!-- And now we get the HTML Readme file and put it in there too -->
-
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
+					
+					<!-- And now we get the HTML Readme file and put it in there too -->
+					
 					<execution>
 						<id>copy-readme</id>
 						<phase>generate-resources</phase>
@@ -134,7 +119,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>com.ruleoftech</groupId>
 				<artifactId>markdown-page-generator-plugin</artifactId>
@@ -171,6 +156,7 @@
 					<descriptors>
 						<descriptor>zip.xml</descriptor>
 					</descriptors>
+					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 			</plugin>
 		</plugins>

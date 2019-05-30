@@ -98,14 +98,9 @@
 							</resources>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
 
-			<!-- Copy the HTML page in the webapp folder -->
+					<!-- Copy the HTML page in the webapp folder -->
 
-			<plugin>
-				<artifactId>maven-resources-plugin</artifactId>
-				<executions>
 					<execution>
 						<id>copy-html</id>
 						<phase>package</phase>

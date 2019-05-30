@@ -5,7 +5,6 @@
 - **Author:** [Stef Schulz](mailto:s.schulz@slothsoft.de)
 - **Repository:** <https://github.com/slothsoft/shera-translator>
 - **Open Issues:** <https://github.com/slothsoft/shera-translator/issues>
-- **Wiki:** _<none>_
 - **Web Application:** [http://app.slothsoft.de](http://app.slothsoft.de/shera/)
 
 The new [She-Ra series on Netflix](https://www.netflix.com/title/80179762) has its own language, so naturally I'm playing around with it trying make it easier for me to write my name in this symbols. Dreamworks has a [handy guide](http://www.dreamworkstv.com/wp-content/uploads/2015/07/SheRa_FirstOnes_Language.pdf) for understanding the language.
@@ -47,6 +46,17 @@ The release contains the following files and folders:
 - *LICENSE* - the license
 - *README.html* - this file as HTML
 - *shera-translator.jar* - the Java application as runnable JAR (if you have Java installed)
+
+Releasing is done with the following steps:
+
+1. remove the snapshot from the files *pom.xml*
+1. create a tag with the version as a name
+1. execute `mvn clean verify`
+1. the finished ZIP  is *shera-release/target/shera-release-<version>.zip*; it's contents are in *shera-release/target/release/*
+1. update the version to the next development version and commit / push all these changes
+1. copy the webapp to <http://app.slothsoft.de/shera>
+1. copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
+
 
 
 
