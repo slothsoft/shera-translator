@@ -43,8 +43,8 @@ I'm self-organizing using [GitHub issues](https://github.com/slothsoft/shera-tra
 
 | Version | Release | Web Link |
 | ------- |---------| -------- |
-| *[0.2.0](https://github.com/slothsoft/shera-translator/milestone/2?closed=1)* | &lt;WIP&gt; | [Web Link](http://app.slothsoft.de/shera-dev/)  |
-| *[0.1.0](https://github.com/slothsoft/shera-translator/milestone/1?closed=1)* | [Proof of Concept](https://github.com/slothsoft/shera-translator/releases/tag/0.1.0) | [Web Link](http://app.slothsoft.de/shera-old/0.1.0/) |
+| **[0.2.0](https://github.com/slothsoft/shera-translator/milestone/2?closed=1)** | &lt;WIP&gt; | [Web Link](http://app.slothsoft.de/shera-dev/)  |
+| **[0.1.0](https://github.com/slothsoft/shera-translator/milestone/1?closed=1)** | [Proof of Concept](https://github.com/slothsoft/shera-translator/releases/tag/0.1.0) | [Web Link](http://app.slothsoft.de/shera-old/0.1.0/) |
 
 
 
@@ -59,6 +59,7 @@ The release contains the following files and folders:
 
 Releasing is done with the following steps:
 
+1. update readme file to include the version to be release (but not WIP)
 1. remove the snapshot from the files *pom.xml*
 1. create a tag with the version as a name
 1. execute `mvn clean install`
