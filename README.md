@@ -7,7 +7,7 @@
 - **Open Issues:** <https://github.com/slothsoft/shera-translator/issues>
 - **Web Application:** [http://app.slothsoft.de](http://app.slothsoft.de/shera/)
 
-The new [She-Ra series on Netflix](https://www.netflix.com/title/80179762) has its own language, so naturally I'm playing around with it trying make it easier for me to write my name in this symbols. Dreamworks has a [handy guide](http://www.dreamworkstv.com/wp-content/uploads/2015/07/SheRa_FirstOnes_Language.pdf) for understanding the language.
+The new [She-Ra series on Netflix](https://www.netflix.com/title/80179762) has its own language, so naturally I'm playing around with it trying make it easier for me to write my name in these symbols. Dreamworks has a [handy guide](http://www.dreamworkstv.com/wp-content/uploads/2015/07/SheRa_FirstOnes_Language.pdf) for understanding the language.
 
 I actually wanted to try my hands at web development for this, and it's as bad as you'd assume from a senior Java developer. Still I'm working on my skills.
 
