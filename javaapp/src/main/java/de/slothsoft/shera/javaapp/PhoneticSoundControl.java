@@ -17,7 +17,7 @@ public class PhoneticSoundControl extends JPanel {
 	public PhoneticSoundControl(PhoneticSound content) {
 		this.content = content;
 
-		setBackground(OutputControl.BACKGROUND);
+		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 		setLayout(new BorderLayout());
 
 		add(new PhoneticSoundImage(content), BorderLayout.CENTER);
@@ -38,7 +38,7 @@ public class PhoneticSoundControl extends JPanel {
 
 		public PhoneticSoundLabel(PhoneticSound content) {
 			super(content.getDisplayName(), SwingConstants.CENTER);
-			setForeground(OutputControl.FOREGROUND);
+			setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 		}
 
 	}

@@ -18,8 +18,8 @@ public class PhoneticSoundImage extends JLabel {
 
 	public PhoneticSoundImage(PhoneticSound content) {
 		this.content = content;
-		setForeground(OutputControl.FOREGROUND);
-		setBackground(OutputControl.BACKGROUND);
+		setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
+		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 		setSymbolSize(DrawingContext.PREF_SYMBOL_SIZE);
 	}
 
