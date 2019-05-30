@@ -55,7 +55,12 @@
 						<phase>package</phase>
 						<configuration>
 							<charset>${project.build.sourceEncoding}</charset>
-							<cssSourceDir>css</cssSourceDir>
+							<webappTargetDir>${project.build.directory}/${finished-js-folder}</webappTargetDir>
+							<nosuffix>true</nosuffix>
+							<skipMerge>true</skipMerge>
+							<jsEngine>CLOSURE</jsEngine>
+							
+							<!-- JavaScript sources -->
 							<jsSourceDir>/</jsSourceDir>
 							<jsIncludes>**/*.js</jsIncludes>
 							<jsExcludes>
@@ -63,10 +68,10 @@
 								<!-- TODO: doesn't work right now -->
 								<jsExcludes>lib/phonetic-sound.js</jsExcludes>
 							</jsExcludes>
-							<webappTargetDir>${project.build.directory}/${finished-js-folder}</webappTargetDir>
-							<nosuffix>true</nosuffix>
-							<skipMerge>true</skipMerge>
-							<jsEngine>CLOSURE</jsEngine>
+							
+							<!-- CSS sources -->
+							<cssSourceDir>style/</cssSourceDir>
+							<cssIncludes>**/*.css</cssIncludes>
 						</configuration>
 						<goals>
 							<goal>minify</goal>
@@ -99,7 +104,7 @@
 						</configuration>
 					</execution>
 
-					<!-- Copy the HTML page(s) in the webapp folder -->
+					<!-- Copy the HTML page(s) and images in the webapp folder -->
 
 					<execution>
 						<id>copy-html</id>
@@ -114,6 +119,7 @@
 									<directory>src/main/webapp</directory>
 									<includes>
 										<include>**/*.html</include>
+										<include>**/*.png</include>
 									</includes>
 									<filtering>true</filtering>
 								</resource>

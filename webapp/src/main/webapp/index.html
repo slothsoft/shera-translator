@@ -2,48 +2,59 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>She-Ra First Ones Translator ${project.version}</title>
+<title>First Ones Translator ${project.version}</title>
 <script src="bundle.js"></script>
 <script src="lib/commons.js"></script>
 <script src="lib/html-canvas.js" defer></script>
 <script src="lib/phonetic-sound.js" defer></script>
+<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
 <body>
 
-	<script>
-		function doMagic() {
-			
-			// clean the div
-			
-			var myNode = document.getElementById("result");
-			while (myNode.firstChild) {
-			    myNode.removeChild(myNode.firstChild);
+	<div id="header">
+		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
+	</div>
+
+	<div class="content translator-content">
+	
+		<script>
+			function doMagic() {
+				
+				// clean the div
+				
+				var myNode = document.getElementById("result");
+				while (myNode.firstChild) {
+				    myNode.removeChild(myNode.firstChild);
+				}
+				
+				// use generated JS to translate
+				
+				var mapper = new de.slothsoft.shera.mapper.EnglishSoundMapper();
+				var spliterator = new de.slothsoft.shera.WordSpliterator(mapper);
+	
+				// generate new elements for each sound
+				
+				spliterator.split(document.getElementById("inputText").value)
+						.forEach(function(element) {
+							var soundTemplate = document.createElement("phonetic-sound");
+							soundTemplate.initFromSound(element);
+							document.getElementById("result").appendChild(soundTemplate);
+							
+						});
 			}
-			
-			// use generated JS to translate
-			
-			var mapper = new de.slothsoft.shera.mapper.EnglishSoundMapper();
-			var spliterator = new de.slothsoft.shera.WordSpliterator(mapper);
-
-			// generate new elements for each sound
-			
-			spliterator.split(document.getElementById("inputText").value)
-					.forEach(function(element) {
-						var soundTemplate = document.createElement("phonetic-sound");
-						soundTemplate.initFromSound(element);
-						document.getElementById("result").appendChild(soundTemplate);
-						
-					});
-		}
-	</script>
-
-	<h2>She-Ra First Ones Translator ${project.version}</h2>
-
-	<input type="text" name="inputText" id="inputText" value="Shee-Rah" />
-	<input type="submit" value="Translate" onclick="doMagic()" />
+		</script>
 	
-	<div id="result"> 
+		<input type="text" name="inputText" id="inputText" value="Shee-Rah" />
+		<input type="submit" value="Translate" onclick="doMagic()" />
+		
+		<div id="result"> 
+		
+		</div>
 	
+	</div>
+	
+	<div id="footer">
+		<div class="content" align="center">Powered by <a href="http://slothsoft.de">slothsoft.de</a></div>
 	</div>
 
 </body>

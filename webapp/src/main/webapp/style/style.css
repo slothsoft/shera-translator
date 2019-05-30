@@ -1,0 +1,59 @@
+/* 
+ * These colors are used: #26215D #D9DBF1 #222222 #FFFFFF #FF8484
+ * See https://github.com/slothsoft/shera-translator/issues/7
+ */
+body {
+	font-size: 10pt;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background-color: #D9DBDA;
+	margin: 0;
+}
+
+#header {
+	background-color: #26215D;
+	color: #FFFFFF;
+	padding: 5pt;
+	height: 25pt;
+}
+
+#header img {
+	height: 18pt;
+	margin: 1pt 5pt;
+}
+
+#header h1 {
+	font-size: 20pt;
+	display: inline;
+}
+
+.content {
+	max-width: 800px;
+	margin: auto;
+}
+
+.translator-content {
+	background-color: #FFFFFF;
+	padding: 15px;
+	position: absolute;
+	top: 35pt; /* header height */
+	bottom: 12pt; /* footer height */
+	/** this centers the div */
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#footer {
+	background-color: #26215D;
+	color: #FFFFFF;
+	padding: 5pt;
+	height: 12pt;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+
+#footer a {
+	color: #FFFFFF;
+}
