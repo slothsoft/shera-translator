@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
 
 	public MainFrame() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setTitle("She-Ra Translator");
+		setTitle("She-Ra Translator " + Messages.getString("Version"));
 		createControls();
 		setSize(800, 400);
 		setLocationRelativeTo(null);
