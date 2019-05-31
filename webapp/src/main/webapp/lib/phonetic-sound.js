@@ -6,12 +6,12 @@
 // template
 
 document.body.innerHTML +=
-'<template id="phonetic-sound-template">' + 
+'<template id="phonetic-sound-template"">' + 
 '	<div>' +
 '		<canvas id="phonetic-sound-canvas" width="1" height="1"></canvas>' +
-'		<h2>' +
+'		<p>' +
 '			<slot name="sound-id">X</slot>' +
-'		</h2>' +
+'		</p>' +
 '	</div>' +
 '</template>';
 
@@ -22,7 +22,7 @@ customElements.define('phonetic-sound',
     constructor() {
       super();
       
-      this.symbolSize = 100;
+      this.symbolSize = 75;
 
       const template = document.getElementById('phonetic-sound-template');
       const templateContent = template.content;
@@ -33,9 +33,9 @@ customElements.define('phonetic-sound',
       
       // visual representation
       style.textContent = `
-        div { padding: 10px; border: 1px solid gray; width: 100px; margin: 10px; float: left; }
-        canvas { border:1px solid #26215D; width: `+this.symbolSize+`px; height: `+this.symbolSize+`px; margin: auto; }
-        h2 { margin: 0 0 10px; text-align: center; }
+        div { padding: 5px; border: 1px solid gray; width: `+this.symbolSize+`px; margin: 5px; float: left;}
+        canvas { border:1px solid #26215D; width: `+this.symbolSize+`px; height: `+this.symbolSize+`px; margin: auto;}
+        p { text-align: center;}
       `;
 
       this.shadow.appendChild(style);

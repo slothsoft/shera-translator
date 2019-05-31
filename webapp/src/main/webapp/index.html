@@ -10,14 +10,21 @@
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
-<body>
+<body onload="doMagic();">
 
 	<div id="header">
 		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
 	</div>
 
 	<div class="content translator-content">
-	
+		<div id="input">
+			<textarea id="inputText" oninput="doMagic()">Shee-Rah</textarea>
+		</div>
+		
+		<div id="result"> 
+		
+		</div>
+		
 		<script>
 			function doMagic() {
 				
@@ -44,13 +51,6 @@
 						});
 			}
 		</script>
-	
-		<input type="text" name="inputText" id="inputText" value="Shee-Rah" />
-		<input type="submit" value="Translate" onclick="doMagic()" />
-		
-		<div id="result"> 
-		
-		</div>
 	
 	</div>
 	

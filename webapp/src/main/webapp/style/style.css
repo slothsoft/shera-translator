@@ -36,12 +36,43 @@ body {
 	padding: 15px;
 	position: absolute;
 	top: 35pt; /* header height */
-	bottom: 12pt; /* footer height */
+	bottom: 22pt; /* footer height */
 	/** this centers the div */
 	left: 0;
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#input textarea {
+	resize: none;
+	border-width: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#result {  
+	overflow-y: scroll;
+}
+
+#input, #result {
+	border: 1px solid #222222;
+	padding: 2px;
+	height: 100%;
+	/* Makes these two divs to two columns */
+	float: left;
+	width: 48%;
+}
+
+#result {
+	float: right;
+}
+
+/* Clear floats after the columns */
+.translator-content:after {
+	content: "";
+	display: table;
+	clear: both;
 }
 
 #footer {
