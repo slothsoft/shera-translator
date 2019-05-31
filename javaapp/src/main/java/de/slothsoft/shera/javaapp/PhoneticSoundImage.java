@@ -3,6 +3,7 @@ package de.slothsoft.shera.javaapp;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import de.slothsoft.shera.PhoneticSound;
@@ -21,6 +22,7 @@ public class PhoneticSoundImage extends JLabel {
 		setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 		setSymbolSize(DrawingContext.PREF_SYMBOL_SIZE);
+		setBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK));
 	}
 
 	@Override

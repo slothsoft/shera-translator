@@ -3,6 +3,7 @@ package de.slothsoft.shera.javaapp;
 import java.awt.FlowLayout;
 import java.util.Objects;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import de.slothsoft.shera.PhoneticSound;
@@ -14,8 +15,9 @@ public class OutputControl extends JPanel {
 	PhoneticSound[] content;
 
 	public OutputControl() {
-		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
-		setLayout(new FlowLayout());
+		setBackground(SheRaJavaApp.COLOR_WHITE);
+		setLayout(new FlowLayout(FlowLayout.LEFT));
+		setBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK));
 	}
 
 	private void createControls() {

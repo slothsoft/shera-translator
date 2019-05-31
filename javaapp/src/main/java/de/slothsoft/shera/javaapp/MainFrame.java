@@ -3,7 +3,11 @@ package de.slothsoft.shera.javaapp;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -21,17 +25,22 @@ public class MainFrame extends JFrame {
 
 	static final int PADDING = 25;
 
+	private JPanel contentPane = new JPanel();
 	private final InputControl inputControl = new InputControl().content("Shee-Rah");
 	private final OutputControl outputControl = new OutputControl();
 
 	public MainFrame() {
+		setContentPane(this.contentPane);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setUndecorated(true);
 		setTitle("She-Ra Translator " + Messages.getString("Version"));
 
+		this.contentPane.setBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK));
+
 		createControls();
 		setSize(800, 400);
 		setLocationRelativeTo(null);
+		hookListeners();
 	}
 
 	private void createControls() {
@@ -97,6 +106,22 @@ public class MainFrame extends JFrame {
 		final WordSpliterator spliterator = new WordSpliterator(this.inputControl.getSelectedSoundMapper());
 		final PhoneticSound[] sounds = spliterator.split(this.inputControl.getContent());
 		this.outputControl.setContent(sounds);
+	}
+
+	private void hookListeners() {
+		Point position = new Point();
+		this.contentPane.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				position.setLocation(e.getX(), e.getY());
+			}
+		});
+		this.contentPane.addMouseMotionListener(new MouseAdapter() {
+			public void mouseDragged(MouseEvent evt) {
+				Rectangle rectangle = getBounds();
+				setBounds(evt.getXOnScreen() - position.x, evt.getYOnScreen() - position.y, rectangle.width,
+						rectangle.height);
+			}
+		});
 	}
 
 }

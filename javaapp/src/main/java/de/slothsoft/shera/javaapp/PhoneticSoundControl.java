@@ -2,6 +2,7 @@ package de.slothsoft.shera.javaapp;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -17,8 +18,10 @@ public class PhoneticSoundControl extends JPanel {
 	public PhoneticSoundControl(PhoneticSound content) {
 		this.content = content;
 
-		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
+		setBackground(SheRaJavaApp.COLOR_WHITE);
 		setLayout(new BorderLayout());
+		setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK),
+				BorderFactory.createEmptyBorder(10, 5, 10, 5)));
 
 		add(new PhoneticSoundImage(content), BorderLayout.CENTER);
 		add(new PhoneticSoundLabel(content), BorderLayout.SOUTH);
@@ -38,7 +41,7 @@ public class PhoneticSoundControl extends JPanel {
 
 		public PhoneticSoundLabel(PhoneticSound content) {
 			super(content.getDisplayName(), SwingConstants.CENTER);
-			setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
+			setForeground(SheRaJavaApp.COLOR_BLACK);
 		}
 
 	}
