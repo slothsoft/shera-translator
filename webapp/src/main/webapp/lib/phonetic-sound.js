@@ -33,6 +33,7 @@ customElements.define('phonetic-sound',
       
       // visual representation
       style.textContent = `
+        * { margin: 0; padding: 0; }
         div { padding: 5px; border: 1px solid gray; width: `+this.symbolSize+`px; margin: 5px; float: left;}
         canvas { border:1px solid #26215D; width: `+this.symbolSize+`px; height: `+this.symbolSize+`px; margin: auto;}
         p { text-align: center;}

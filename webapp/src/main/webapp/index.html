@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
-<body onload="doMagic();">
+<body onload="translateInput();">
 
 	<div id="header">
 		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
@@ -18,7 +18,19 @@
 
 	<div class="content translator-content">
 		<div id="input">
-			<textarea id="inputText" oninput="doMagic()">Shee-Rah</textarea>
+			<textarea id="inputText" oninput="translateInput()">Shee-Rah</textarea>
+			<div id="settings-wrapper">
+				<div id="settings">
+					<h2>Settings</h2>
+					<table>
+						<col width="25">
+						<tr><td>Language:</td><td><select id="language" onchange="translateInput()">
+						<option value="en" selected="selected">English</option>
+						<option value="de">German</option>
+						</select></td></tr>
+					</table>
+				</div>	
+			</div>
 		</div>
 		
 		<div id="result"> 
@@ -26,7 +38,7 @@
 		</div>
 		
 		<script>
-			function doMagic() {
+			function translateInput() {
 				
 				// clean the div
 				
@@ -35,20 +47,23 @@
 				    myNode.removeChild(myNode.firstChild);
 				}
 				
-				// use generated JS to translate
-				
-				var mapper = new de.slothsoft.shera.mapper.EnglishSoundMapper();
-				var spliterator = new de.slothsoft.shera.WordSpliterator(mapper);
-	
 				// generate new elements for each sound
 				
+				var spliterator = new de.slothsoft.shera.WordSpliterator(getMapperByLanguage());
 				spliterator.split(document.getElementById("inputText").value)
 						.forEach(function(element) {
 							var soundTemplate = document.createElement("phonetic-sound");
-							soundTemplate.initFromSound(element);
+						 	soundTemplate.initFromSound(element);
 							document.getElementById("result").appendChild(soundTemplate);
-							
 						});
+			}
+
+			function getMapperByLanguage() {
+				var languageSelect = document.getElementById("language");
+				var locale = languageSelect.options[languageSelect.selectedIndex].value;
+				if (locale == "de")
+					return new de.slothsoft.shera.mapper.GermanSoundMapper();
+				return new de.slothsoft.shera.mapper.EnglishSoundMapper();
 			}
 		</script>
 	

@@ -2,6 +2,12 @@
  * These colors are used: #26215D #D9DBF1 #222222 #FFFFFF #FF8484
  * See https://github.com/slothsoft/shera-translator/issues/7
  */
+ 
+* {
+ 	margin: 0; 
+ 	padding: 0;
+}
+ 
 body {
 	font-size: 10pt;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
@@ -44,28 +50,52 @@ body {
 	margin-right: auto;
 }
 
+#input {
+	float: left;
+}
+
 #input textarea {
+	border: 1px solid #222222;
 	resize: none;
-	border-width: 0;
 	width: 100%;
-	height: 100%;
+	height: 50%;
+}
+
+#input #settings-wrapper {
+	width: 100%;
+}
+
+#input #settings {
+	margin-top: 15pt;
+	border: 1px solid #222222;
+}
+	
+#input #settings h2 {
+	background-color: #26215D;
+	border-bottom: 1px solid #222222;
+	color: #FFFFFF;
+	padding: 2pt;
+}
+
+#input #settings table {
+	padding: 2pt;
+	width: 100%;	
+}
+
+#input #settings input, #input #settings select {
+	width: 99%;	
 }
 
 #result {  
+	border: 1px solid #222222;
 	overflow-y: scroll;
+	float: right;
 }
 
 #input, #result {
-	border: 1px solid #222222;
-	padding: 2px;
 	height: 100%;
 	/* Makes these two divs to two columns */
-	float: left;
 	width: 48%;
-}
-
-#result {
-	float: right;
 }
 
 /* Clear floats after the columns */
