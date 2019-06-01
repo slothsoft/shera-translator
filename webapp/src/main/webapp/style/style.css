@@ -105,6 +105,13 @@ body {
 	clear: both;
 }
 
+#big-container {  
+	border: 1px solid #222222;
+	overflow-y: scroll;
+	height: 100%;
+	width: 100%;
+}
+
 #footer {
 	background-color: #26215D;
 	color: #FFFFFF;

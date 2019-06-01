@@ -53,7 +53,7 @@
 				spliterator.split(document.getElementById("inputText").value)
 						.forEach(function(element) {
 							var soundTemplate = document.createElement("phonetic-sound");
-						 	soundTemplate.initFromSound(element);
+						 	soundTemplate.initFromSoundOrdinal(element);
 							document.getElementById("result").appendChild(soundTemplate);
 						});
 			}

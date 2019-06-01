@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>First Ones Translator ${project.version}</title>
+<script src="bundle.js"></script>
+<script src="lib/commons.js"></script>
+<script src="lib/html-canvas.js" defer></script>
+<script src="lib/phonetic-sound.js" defer></script>
+<link rel="stylesheet" type="text/css" href="style/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
+</head>
+<body onload="showAllSounds();">
+
+	<div id="header">
+		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
+	</div>
+
+	<div class="content translator-content">
+		<div id="big-container"> 
+		<script>
+			function showAllSounds() {
+				de.slothsoft.shera.PhoneticSound["_$wrappers"].forEach(function(element) {
+							var soundTemplate = document.createElement("phonetic-sound");
+						 	soundTemplate.initFromSoundObject(element);
+							document.getElementById("big-container").appendChild(soundTemplate);
+						});
+			}
+		</script>
+	
+		</div>
+	</div>
+	
+	<div id="footer">
+		<div class="content" align="center">Powered by <a href="http://slothsoft.de">slothsoft.de</a></div>
+	</div>
+
+</body>
+</html>

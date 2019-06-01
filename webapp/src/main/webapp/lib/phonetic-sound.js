@@ -47,8 +47,11 @@ customElements.define('phonetic-sound',
       this.canvas.height = this.symbolSize;
     }
     
-    initFromSound(soundOrdinal) {
-    	var soundObject = de.slothsoft.shera.PhoneticSound["_$wrappers"][soundOrdinal];
+    initFromSoundOrdinal(soundOrdinal) {
+		this.initFromSoundObject(de.slothsoft.shera.PhoneticSound["_$wrappers"][soundOrdinal]);
+    }
+    
+    initFromSoundObject(soundObject) {
 		createSlot(this, "sound-id", soundObject.getDisplayName());
 		
 	    // prepare the canvas
