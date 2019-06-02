@@ -1,6 +1,9 @@
 /**
  * This control shows a single PhoneticSound. It's probably similar to the class
  * PhoneticSoundImage.
+ * 
+ * @see bundle.js
+ * @see common.js
  */
 
 // template
@@ -53,16 +56,14 @@ customElements.define('phonetic-sound',
     
     initFromSoundObject(soundObject) {
 		createSlot(this, "sound-id", soundObject.getDisplayName());
-		
-	    // prepare the canvas
-	    var ctx = this.canvas.getContext('2d');
-	    ctx.fillStyle = "#26215D";
-    	ctx.fillRect(0, 0, this.symbolSize, this.symbolSize);
-	    ctx.fillStyle = "white";
-	    ctx.strokeStyle = "white";
-	    
+
 	    // paint the symbols
-		var dc = new de.slothsoft.shera.dc.DrawingContext(new HtmlCanvas(ctx)).height(this.symbolSize).width(this.symbolSize);
+		var border = 2;
+		var nettoSymbolSize = this.symbolSize - 2 * border;
+	    var ctx = prepare2DContextOfCanvas(this.canvas);
+	    var canvas = new HtmlCanvas(ctx);
+	    canvas.translate(border, border);
+		var dc = new de.slothsoft.shera.dc.DrawingContext(canvas).height(nettoSymbolSize).width(nettoSymbolSize);
 		soundObject.drawOn(dc);
     }
 });

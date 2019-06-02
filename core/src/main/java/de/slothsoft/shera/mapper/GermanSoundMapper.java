@@ -94,8 +94,8 @@ public class GermanSoundMapper implements SoundMapper {
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "Deutsch";
+	public String getLocale() {
+		return "de";
 	}
 
 	@Override

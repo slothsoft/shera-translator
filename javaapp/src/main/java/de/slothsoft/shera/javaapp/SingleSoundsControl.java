@@ -8,13 +8,13 @@ import javax.swing.JPanel;
 
 import de.slothsoft.shera.PhoneticSound;
 
-public class OutputControl extends JPanel {
+public class SingleSoundsControl extends JPanel {
 
 	private static final long serialVersionUID = -4836650964707954738L;
 
 	PhoneticSound[] content;
 
-	public OutputControl() {
+	public SingleSoundsControl() {
 		setBackground(SheRaJavaApp.COLOR_WHITE);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		setBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK));
@@ -30,7 +30,7 @@ public class OutputControl extends JPanel {
 		return this.content;
 	}
 
-	public OutputControl content(PhoneticSound[] newContent) {
+	public SingleSoundsControl content(PhoneticSound[] newContent) {
 		setContent(newContent);
 		return this;
 	}

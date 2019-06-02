@@ -25,11 +25,14 @@ public enum PhoneticSound {
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int partWidth = width / 5;
 			final int y = height / 2;
-			result.setStartPointX(width / 2 - partWidth);
+			final int endPoint = width / 2 - partWidth;
 
 			canvas.drawLine(width / 2, 0, width / 2, y);
 			canvas.drawLine(width / 2, y, width / 2 - partWidth, y);
-			canvas.drawLine(width / 2 - partWidth, y, result.getStartPointX(), height);
+			canvas.drawLine(width / 2 - partWidth, y, endPoint, height);
+
+			result.setStartPointX(endPoint - width / 2);
+			result.setSkipConnectionLine(true);
 		}
 
 	},
@@ -41,11 +44,14 @@ public enum PhoneticSound {
 			final int partWidth = width / 5;
 			final int partHeight = height / 5;
 			final int y = (height - partHeight) / 2;
-			result.setStartPointX(width / 2 - partWidth);
+			final int endPoint = width / 2 - partWidth;
 
 			canvas.drawLine(width / 2, 0, width / 2, y);
 			canvas.drawLine(width / 2, y, width / 2 - partWidth, y + partHeight);
-			canvas.drawLine(width / 2 - partWidth, y + partHeight, result.getStartPointX(), height);
+			canvas.drawLine(width / 2 - partWidth, y + partHeight, endPoint, height);
+
+			result.setStartPointX(endPoint - width / 2);
+			result.setSkipConnectionLine(true);
 		}
 
 	},
@@ -108,7 +114,7 @@ public enum PhoneticSound {
 
 	},
 
-	E("PET", false) { // see TOO
+	E("PET", true) { // see TOO
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -120,7 +126,6 @@ public enum PhoneticSound {
 
 			// the triangle is to small, so draw connection myself
 			canvas.drawLine(halfWidth, 0, halfWidth, height);
-			result.skipConnectionLine(true);
 		}
 
 	},
@@ -284,7 +289,7 @@ public enum PhoneticSound {
 
 	},
 
-	OO("TOO", false) { // see PET
+	OO("TOO", true) { // see PET
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -296,7 +301,6 @@ public enum PhoneticSound {
 
 			// the triangle is to small, so draw connection myself
 			canvas.drawLine(halfWidth, 0, halfWidth, height);
-			result.skipConnectionLine(true);
 		}
 
 	},
@@ -490,9 +494,8 @@ public enum PhoneticSound {
 	}
 
 	public NextDrawing drawOn(DrawingContext dc) {
-		final NextDrawing result = dc.createNextDrawing();
-		// -1 because we start drawing with 0 TODO: find of if this is the correct place
-		drawOn(dc.getCanvas(), dc.getWidth() - 1, dc.getHeight() - 1, result);
+		final NextDrawing result = dc.createNextDrawing().skipConnectionLine(this.lineOnly);
+		drawOn(dc.getCanvas(), dc.getWidth(), dc.getHeight(), result);
 		return result;
 	}
 

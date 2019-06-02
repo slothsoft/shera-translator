@@ -43,10 +43,11 @@ public interface SoundMapper {
 	PhoneticSound[] getSounds(String letter);
 
 	/**
-	 * The display name of the sound mapper.
+	 * The locale of the sound mapper, e.g. "en" or "en_UK".
 	 *
 	 * @return a display name; never null
+	 * @since 0.2.0 (before it was getDisplayName())
 	 */
 
-	String getDisplayName();
+	String getLocale();
 }

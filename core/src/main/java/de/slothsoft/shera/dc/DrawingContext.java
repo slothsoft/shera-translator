@@ -3,7 +3,7 @@ package de.slothsoft.shera.dc;
 import java.util.Objects;
 
 /**
- * The context that sounds can be painted on.
+ * The context that <b>single</b> sounds can be painted on.
  *
  * @author <a href="mailto:s.schulz@slothsoft.de">Stef Schulz</a>
  * @since 0.1.0
@@ -22,7 +22,7 @@ public class DrawingContext {
 	}
 
 	public NextDrawing createNextDrawing() {
-		return new NextDrawing(this.width / 2, this.height);
+		return new NextDrawing(0, this.height);
 	}
 
 	public Canvas getCanvas() {

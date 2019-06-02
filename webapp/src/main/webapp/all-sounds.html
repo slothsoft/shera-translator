@@ -7,27 +7,25 @@
 <script src="lib/commons.js"></script>
 <script src="lib/html-canvas.js" defer></script>
 <script src="lib/phonetic-sound.js" defer></script>
+<script src="lib/phonetic-sound-list.js" defer></script>
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
-<body onload="showAllSounds();">
+<body onload="initPage();">
 
+	<script>
+		function initPage() {
+			document.getElementById("phonetic-sound-list").initFromSoundObjects(de.slothsoft.shera.PhoneticSound["_$wrappers"]);
+		}
+	</script>
+	
 	<div id="header">
 		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
 	</div>
 
 	<div class="content translator-content">
 		<div id="big-container"> 
-		<script>
-			function showAllSounds() {
-				de.slothsoft.shera.PhoneticSound["_$wrappers"].forEach(function(element) {
-							var soundTemplate = document.createElement("phonetic-sound");
-						 	soundTemplate.initFromSoundObject(element);
-							document.getElementById("big-container").appendChild(soundTemplate);
-						});
-			}
-		</script>
-	
+			<phonetic-sound-list id="phonetic-sound-list" />
 		</div>
 	</div>
 	

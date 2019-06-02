@@ -1,4 +1,11 @@
- class HtmlCanvas {
+/**
+ * A implementation of Canvas.
+ * 
+ * @since 0.1.0
+ * @see bundle.js
+ */
+
+class HtmlCanvas {
 	 
     constructor(canvas) {
         this.canvas = canvas;
@@ -29,10 +36,12 @@
 
     fillRectangle(x1, y1, x2, y2) {
     	this.canvas.fillRect(x1, y1, x2-x1, y2-y1);
+		this.canvas.fill();
     }
     
     drawRectangle(x1, y1, x2, y2) {
     	this.canvas.rect(x1, y1, x2-x1, y2-y1);
+		this.canvas.stroke();
     }
 
     fillTriangle(x1, y1, x2, y2, x3, y3) {
@@ -57,6 +66,10 @@
     	this.canvas.moveTo(x1, y1);
     	this.canvas.lineTo(x2, y2);
     	this.canvas.stroke();
+    }
+
+    translate(x, y) {
+    	this.canvas.translate(x, y);
     }
 }
 HtmlCanvas["__interfaces"] = ["de.slothsoft.shera.dc.Canvas"];

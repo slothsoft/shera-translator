@@ -48,6 +48,11 @@ public class LogCanvas implements Canvas {
 		this.log.add("line " + point(x1, y1) + " -> " + point(x2, y2));
 	}
 
+	@Override
+	public void translate(int x, int y) {
+		this.log.add("move " + point(x, y));
+	}
+
 	private static String point(int x, int y) {
 		return x + "|" + y;
 	}

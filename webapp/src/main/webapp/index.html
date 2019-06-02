@@ -7,10 +7,52 @@
 <script src="lib/commons.js"></script>
 <script src="lib/html-canvas.js" defer></script>
 <script src="lib/phonetic-sound.js" defer></script>
+<script src="lib/phonetic-sound-list.js" defer></script>
 <link rel="stylesheet" type="text/css" href="style/style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
-<body onload="translateInput();">
+<body onload="initPage();">
+
+	<script>
+		function initPage() {
+			translateInput();
+			document.getElementById('words').style.display = "block";
+		}
+		
+		function translateInput() {
+			// init stuff
+			var spliterator = new de.slothsoft.shera.WordSpliterator(getMapperByLanguage());
+			var inputText = document.getElementById("inputText").value;
+			
+			// generate new elements for each single sound
+			document.getElementById("single-sounds").initFromSoundOrdinals(spliterator.splitIntoSounds(inputText));
+			
+			// generate entire words
+			var canvas = document.getElementById("words-canvas");
+		    var ctx = prepare2DContextOfCanvas(canvas);
+		    
+			var painter = new de.slothsoft.shera.dc.WordPainter(new HtmlCanvas(ctx));
+			var metrics = painter.paintWords(spliterator.splitIntoWords(inputText));
+
+		    var border = 5;
+			canvas.setAttribute("width", (metrics.width + 2 * border) + "px");
+			canvas.setAttribute("height",  (metrics.height + 2 * border) + "px");
+
+		    ctx.translate(border, border);
+			ctx.fillStyle = "white";
+			ctx.strokeStyle = "white";
+			painter.paintWords(spliterator.splitIntoWords(inputText));
+		}
+
+		function getMapperByLanguage() {
+			var languageSelect = document.getElementById("language");
+			var locale = languageSelect.options[languageSelect.selectedIndex].value;
+			if (locale == "de")
+				return new de.slothsoft.shera.mapper.GermanSoundMapper();
+			return new de.slothsoft.shera.mapper.EnglishSoundMapper();
+		}
+	</script>
+
 
 	<div id="header">
 		<div class="content"><img src="style/fot.png"/><h1>First Ones Translator ${project.version}</h1></div>
@@ -32,41 +74,19 @@
 				</div>	
 			</div>
 		</div>
-		
-		<div id="result"> 
-		
+				
+		<div id="result">
+			<div class="tab">
+				<button class="tab-button" onclick="openTab(event, 'single-sounds')">Sounds</button>
+				<button class="tab-button active" onclick="openTab(event, 'words')">Words</button>
+		  	</div>
+		  	
+			<phonetic-sound-list id="single-sounds" class="tab-content"></phonetic-sound-list>
+			
+			<div id="words" class="tab-content"> 
+				<canvas id="words-canvas"></canvas>
+			</div>
 		</div>
-		
-		<script>
-			function translateInput() {
-				
-				// clean the div
-				
-				var myNode = document.getElementById("result");
-				while (myNode.firstChild) {
-				    myNode.removeChild(myNode.firstChild);
-				}
-				
-				// generate new elements for each sound
-				
-				var spliterator = new de.slothsoft.shera.WordSpliterator(getMapperByLanguage());
-				spliterator.split(document.getElementById("inputText").value)
-						.forEach(function(element) {
-							var soundTemplate = document.createElement("phonetic-sound");
-						 	soundTemplate.initFromSoundOrdinal(element);
-							document.getElementById("result").appendChild(soundTemplate);
-						});
-			}
-
-			function getMapperByLanguage() {
-				var languageSelect = document.getElementById("language");
-				var locale = languageSelect.options[languageSelect.selectedIndex].value;
-				if (locale == "de")
-					return new de.slothsoft.shera.mapper.GermanSoundMapper();
-				return new de.slothsoft.shera.mapper.EnglishSoundMapper();
-			}
-		</script>
-	
 	</div>
 	
 	<div id="footer">

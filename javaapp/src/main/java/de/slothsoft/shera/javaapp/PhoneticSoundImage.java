@@ -3,10 +3,10 @@ package de.slothsoft.shera.javaapp;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 
 import de.slothsoft.shera.PhoneticSound;
+import de.slothsoft.shera.dc.Canvas;
 import de.slothsoft.shera.dc.DrawingContext;
 
 public class PhoneticSoundImage extends JLabel {
@@ -16,13 +16,13 @@ public class PhoneticSoundImage extends JLabel {
 	PhoneticSound content;
 
 	int symbolSize;
+	final int border = 2;
 
 	public PhoneticSoundImage(PhoneticSound content) {
 		this.content = content;
 		setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 		setSymbolSize(DrawingContext.PREF_SYMBOL_SIZE);
-		setBorder(BorderFactory.createLineBorder(SheRaJavaApp.COLOR_BLACK));
 	}
 
 	@Override
@@ -32,7 +32,12 @@ public class PhoneticSoundImage extends JLabel {
 
 		if (this.content != null) {
 			g.setColor(getForeground());
-			this.content.drawOn(new DrawingContext(new SwingCanvas(g)).height(this.symbolSize).width(this.symbolSize));
+
+			final int nettoSymbolSize = this.symbolSize - 2 * this.border - 1;
+
+			final Canvas canvas = new SwingCanvas(g);
+			canvas.translate(this.border, this.border);
+			this.content.drawOn(new DrawingContext(canvas).width(nettoSymbolSize).height(nettoSymbolSize));
 		}
 	}
 

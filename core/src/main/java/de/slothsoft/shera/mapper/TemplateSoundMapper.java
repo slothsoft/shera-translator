@@ -62,8 +62,8 @@ public class TemplateSoundMapper implements SoundMapper {
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "Template";
+	public String getLocale() {
+		return "xx";
 	}
 
 	@Override

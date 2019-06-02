@@ -3,6 +3,7 @@ package de.slothsoft.shera.javaapp;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagLayout;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.swing.BorderFactory;
@@ -135,7 +136,7 @@ public class InputControl extends JPanel {
 				boolean cellHasFocus) {
 			final JLabel result = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
 					cellHasFocus);
-			result.setText(((SoundMapper) value).getDisplayName());
+			result.setText(Locale.forLanguageTag(((SoundMapper) value).getLocale()).getDisplayLanguage());
 			return result;
 		}
 	}

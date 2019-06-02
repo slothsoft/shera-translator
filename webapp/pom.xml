@@ -24,6 +24,31 @@
 
 		<plugins>
 		
+			<!-- Replace broken Regex with fixed one -->
+		
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>maven-replacer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>replace-bad-regex</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<file>src/main/webapp/bundle.js</file>
+					<replacements>
+						<replacement>
+							<token>\"\\\\s\+\"</token>
+							<value>/\\s+/</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+			
 			<!-- Didn't work, so I gave up =/
 			<plugin>
 				<groupId>com.github.searls</groupId>
@@ -66,7 +91,7 @@
 							<jsExcludes>
 								<jsExcludes>.tsc-rootfile.js</jsExcludes>
 								<!-- TODO: doesn't work right now -->
-								<jsExcludes>lib/phonetic-sound.js</jsExcludes>
+								<jsExcludes>lib/phonetic-sound*.js</jsExcludes>
 							</jsExcludes>
 							
 							<!-- CSS sources -->
@@ -97,7 +122,7 @@
 								<resource>
 									<directory>src/main/webapp</directory>
 									<includes>
-										<include>lib/phonetic-sound.js</include>
+										<include>lib/phonetic-sound*.js</include>
 									</includes>
 								</resource>
 							</resources>

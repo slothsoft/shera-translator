@@ -14,9 +14,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JToolBar;
 
-import de.slothsoft.shera.PhoneticSound;
 import de.slothsoft.shera.WordSpliterator;
 
 public class MainFrame extends JFrame {
@@ -25,9 +25,10 @@ public class MainFrame extends JFrame {
 
 	static final int PADDING = 25;
 
-	private JPanel contentPane = new JPanel();
+	private final JPanel contentPane = new JPanel();
 	private final InputControl inputControl = new InputControl().content("Shee-Rah");
-	private final OutputControl outputControl = new OutputControl();
+	private final SingleSoundsControl singleSoundsControl = new SingleSoundsControl();
+	private final WordControl wordControl = new WordControl();
 
 	public MainFrame() {
 		setContentPane(this.contentPane);
@@ -54,7 +55,7 @@ public class MainFrame extends JFrame {
 		content.setBackground(SheRaJavaApp.COLOR_WHITE);
 
 		content.add(this.inputControl);
-		content.add(this.outputControl);
+		content.add(createOutputControls());
 		add(content, BorderLayout.CENTER);
 
 		this.inputControl.onModify(this::translate);
@@ -102,22 +103,31 @@ public class MainFrame extends JFrame {
 		return result;
 	}
 
+	private Component createOutputControls() {
+		final JTabbedPane result = new JTabbedPane();
+		result.addTab(Messages.getString("SingleSounds"), this.singleSoundsControl);
+		result.addTab(Messages.getString("Word"), this.wordControl);
+		return result;
+	}
+
 	void translate() {
 		final WordSpliterator spliterator = new WordSpliterator(this.inputControl.getSelectedSoundMapper());
-		final PhoneticSound[] sounds = spliterator.split(this.inputControl.getContent());
-		this.outputControl.setContent(sounds);
+		this.singleSoundsControl.setContent(spliterator.splitIntoSounds(this.inputControl.getContent()));
+		this.wordControl.setContent(spliterator.splitIntoWords(this.inputControl.getContent()));
 	}
 
 	private void hookListeners() {
-		Point position = new Point();
+		final Point position = new Point();
 		this.contentPane.addMouseListener(new MouseAdapter() {
+			@Override
 			public void mousePressed(MouseEvent e) {
 				position.setLocation(e.getX(), e.getY());
 			}
 		});
 		this.contentPane.addMouseMotionListener(new MouseAdapter() {
+			@Override
 			public void mouseDragged(MouseEvent evt) {
-				Rectangle rectangle = getBounds();
+				final Rectangle rectangle = getBounds();
 				setBounds(evt.getXOnScreen() - position.x, evt.getYOnScreen() - position.y, rectangle.width,
 						rectangle.height);
 			}

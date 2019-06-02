@@ -31,8 +31,8 @@ public class DefaultSoundMapper implements SoundMapper {
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "Default";
+	public String getLocale() {
+		return "xx";
 	}
 
 	@Override

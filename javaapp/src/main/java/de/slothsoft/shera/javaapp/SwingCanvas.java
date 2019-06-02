@@ -53,4 +53,9 @@ public class SwingCanvas implements Canvas {
 		this.context.drawLine(x1, y1, x2, y2);
 	}
 
+	@Override
+	public void translate(int x, int y) {
+		this.context.translate(x, y);
+	}
+
 }

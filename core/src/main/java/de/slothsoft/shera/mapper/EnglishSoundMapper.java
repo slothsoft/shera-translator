@@ -32,8 +32,8 @@ public class EnglishSoundMapper implements SoundMapper {
 	}
 
 	@Override
-	public String getDisplayName() {
-		return "English";
+	public String getLocale() {
+		return "en";
 	}
 
 	@Override

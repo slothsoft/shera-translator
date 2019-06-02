@@ -24,7 +24,7 @@ public class WordSpliteratorExamplesTest {
 		final WordSpliterator spliterator = new WordSpliterator(new EnglishSoundMapper());
 
 		// close enough I guess
-		final PhoneticSound[] actualSounds = spliterator.split("Shee-Rah");
+		final PhoneticSound[] actualSounds = spliterator.splitIntoSounds("Shee-Rah");
 
 		Assert.assertArrayEquals(Arrays.toString(actualSounds), SOUNDS_SHERA, actualSounds);
 	}
@@ -34,7 +34,7 @@ public class WordSpliteratorExamplesTest {
 		final WordSpliterator spliterator = new WordSpliterator(new GermanSoundMapper());
 
 		// close enough I guess
-		final PhoneticSound[] actualSounds = spliterator.split("Shih-Rah");
+		final PhoneticSound[] actualSounds = spliterator.splitIntoSounds("Shih-Rah");
 
 		Assert.assertArrayEquals(Arrays.toString(actualSounds), SOUNDS_SHERA, actualSounds);
 	}
@@ -46,7 +46,7 @@ public class WordSpliteratorExamplesTest {
 		final WordSpliterator spliterator = new WordSpliterator(new EnglishSoundMapper());
 
 		// close enough I guess
-		final PhoneticSound[] actualSounds = spliterator.split("Shadow");
+		final PhoneticSound[] actualSounds = spliterator.splitIntoSounds("Shadow");
 
 		Assert.assertArrayEquals(Arrays.toString(actualSounds), SOUNDS_SHADOW, actualSounds);
 	}
@@ -58,7 +58,7 @@ public class WordSpliteratorExamplesTest {
 		final WordSpliterator spliterator = new WordSpliterator(new GermanSoundMapper());
 
 		// close enough I guess
-		final PhoneticSound[] actualSounds = spliterator.split("Steffie");
+		final PhoneticSound[] actualSounds = spliterator.splitIntoSounds("Steffie");
 
 		Assert.assertArrayEquals(Arrays.toString(actualSounds), SOUNDS_STEFFI_DE, actualSounds);
 	}

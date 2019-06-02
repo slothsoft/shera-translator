@@ -22,7 +22,33 @@ public class WordSpliterator {
 		this.supportedLetters.sort((o1, o2) -> o2.length() - o1.length());
 	}
 
-	public PhoneticSound[] split(String word) {
+	/**
+	 * Splits a string into {@link Word}s.
+	 *
+	 * @param words - a string with newlines etc.
+	 * @return an array of {@link Word}s
+	 * @since 0.2.0
+	 */
+
+	public Word[] splitIntoWords(String words) {
+		final String[] wordsSplit = words.split("\\s+");
+		final Word[] result = new Word[wordsSplit.length];
+
+		for (int i = 0; i < wordsSplit.length; i++) {
+			result[i] = new Word(splitIntoSounds(wordsSplit[i]));
+		}
+		return result;
+	}
+
+	/**
+	 * Splits a string into {@link PhoneticSound}s.
+	 *
+	 * @param word - a string
+	 * @return an array of {@link PhoneticSound}s
+	 * @since 0.2.0 (before it was split())
+	 */
+
+	public PhoneticSound[] splitIntoSounds(String word) {
 		final String usedWord = word.toLowerCase();
 		final List<PhoneticSound> result = new ArrayList<>();
 
