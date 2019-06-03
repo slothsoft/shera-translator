@@ -44,6 +44,7 @@ I'm self-organizing using [GitHub issues](https://github.com/slothsoft/shera-tra
 | Version | Release | Web Link |
 | ------- |---------| -------- |
 | **[development](https://github.com/slothsoft/shera-translator/milestones)** | &lt;WIP&gt; | [Web Link](http://app.slothsoft.de/shera-dev/)  |
+| **[0.2.0](https://github.com/slothsoft/shera-translator/milestone/2?closed=1)** | [Words & Groups](https://github.com/slothsoft/shera-translator/releases/tag/0.2.0) | [Web Link](http://app.slothsoft.de/shera-old/0.2.0/) |
 | **[0.1.0](https://github.com/slothsoft/shera-translator/milestone/1?closed=1)** | [Proof of Concept](https://github.com/slothsoft/shera-translator/releases/tag/0.1.0) | [Web Link](http://app.slothsoft.de/shera-old/0.1.0/) |
 
 
