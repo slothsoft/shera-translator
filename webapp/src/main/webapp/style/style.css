@@ -32,12 +32,24 @@ body {
 	display: inline;
 }
 
+#main-menu-button {
+	background-image: url("menu.svg");
+  	background-size: 25pt 25pt;
+	width: 25pt;
+	height: 25pt;
+}
+
+.right {
+	float: right;
+}
+
 .content {
-	max-width: 800px;
+	max-width: 830px; /*content width! */
 	margin: auto;
 }
 
 .translator-content {
+	max-width: 800px; /* content width! */
 	background-color: #FFFFFF;
 	padding: 15px;
 	position: absolute;
@@ -128,6 +140,7 @@ body {
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	text-align: center;
 }
 
 #footer a {
@@ -165,4 +178,59 @@ body {
 	display: none;
 	border: 1px solid #222222;
 	height: calc(100% - 37pt);
+}
+
+/* A menü with button and dropdown */
+
+.drop-button {
+	background-color: #26215D;
+	color: white;
+	padding: 5pt;
+	font-size: 12pt;
+	border: none;
+	cursor: pointer;
+}
+
+.drop-button:hover, .drop-button:focus {
+	background-color: #FF8484;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #D9DBF1;
+	min-width: 180px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+	border: 1px solid #222222;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.dropdown-content hr {
+	border: 1px solid #222222;
+}
+
+.dropdown a:hover {
+	background-color: #FF8484;
+}
+
+.dropdown-content .active {
+	color: #222222;
+	font-weight: bolder;
+}
+
+.show {
+	display: block;
 }

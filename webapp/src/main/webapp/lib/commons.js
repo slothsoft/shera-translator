@@ -3,13 +3,29 @@
  * It's also kinda like a trashcan. (I'm not good at structuring web apps yet.)
  */
 
+
+/**
+ * This function inits every functionality that needs it in this file.
+ * 
+ * @returns nothing
+ * @since 0.3.0
+ */
+
+function initCommonFunctionality() {
+	initDropDown();
+	initMainMenu();
+}
+
 /**
  * Not sure if strictly necessary, but this class fills a slot on the
  * "phonetic-sound.js" template.
  * 
- * @param parentElement - the element this sloth should be added to
- * @param slotName - name of the slot
- * @param slotContent - content of the slot
+ * @param parentElement -
+ *            the element this sloth should be added to
+ * @param slotName -
+ *            name of the slot
+ * @param slotContent -
+ *            content of the slot
  * @returns nothing
  * @since 0.1.0
  */
@@ -72,4 +88,66 @@ function prepare2DContextOfCanvas(canvas) {
 	ctx.fillStyle = "white";
 	ctx.strokeStyle = "white";
 	return ctx;
+}
+
+/**
+ * When the user clicks on the menu button, toggle between hiding and showing
+ * the dropdown content.
+ * 
+ * @returns nothing
+ * @since 0.3.0
+ */
+
+function toggleMenu(event, menuName) {
+	var menu = document.getElementById(menuName);
+	menu.classList.toggle("show");
+	var menuOffset = event.currentTarget.getBoundingClientRect().width - menu.getBoundingClientRect().width;
+	menu.style.left = menuOffset + "px";
+}
+
+/**
+ * Close the dropdown if the user clicks outside of it.
+ * 
+ * @since 0.3.0
+ */
+
+function initDropDown() {
+	window.onclick = function(event) {
+		if (!event.target.matches('.drop-button')) {
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+				var openDropdown = dropdowns[i];
+				if (openDropdown.classList.contains('show')) {
+					openDropdown.classList.remove('show');
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Creates the default main menu.
+ * 
+ * @returns nothing
+ * @since 0.3.0
+ */
+
+function initMainMenu() {
+	var mainMenu = document.getElementById("main-menu");
+	if (mainMenu != null) {
+		var menuHtml = `
+			<a href="index.html">Latin → First Ones</a>
+			<a href="all-sounds.html">All Sounds</a>
+			<hr/>
+			<a href="https://github.com/slothsoft/shera-translator/">GitHub Project</a>
+			<a href="https://github.com/slothsoft/shera-translator/issues/">Report Issue</a>
+		`;
+		// this adds a special style to the active page so it can be styled
+		var sitePath = window.location.pathname;
+		var page = sitePath.substring(sitePath.lastIndexOf('/') + 1);
+		menuHtml = menuHtml.replace('"' + page + '"', '"' + page + '" class="active"');
+		
+		mainMenu.innerHTML = menuHtml;
+	}
 }
