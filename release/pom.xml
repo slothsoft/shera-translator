@@ -7,7 +7,6 @@
 
 	<description>This project is just for creating a beautiful ZIP file with the JAR, the webapp and possibly a README file. Let's see how that goes...</description>
 
-
 	<parent>
 		<groupId>de.slothsoft.shera</groupId>
 		<artifactId>shera-build</artifactId>
@@ -15,7 +14,8 @@
 	</parent>
 
 	<properties>
-		<release-folder>target/release</release-folder>
+		<release-folder>${basedir}/target/release</release-folder>
+		<webapp-folder>${release-folder}/webapp</webapp-folder>
 	</properties>
 
 	<dependencies>
@@ -30,6 +30,22 @@
 	</dependencies>
 
 	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- This is the base configuration for all uploads -->
+
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<configuration>
+						<serverId>slothsoft.de</serverId>
+						<fromDir>${webapp-folder}</fromDir>
+						<url>ftp://slothsoft.de/htdocs/app/</url>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 
 			<!-- Copy the runnable JAR over so we can put it into the ZIP -->
@@ -63,7 +79,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${release-folder}/webapp</outputDirectory>
+							<outputDirectory>${webapp-folder}</outputDirectory>
 							<resources>
 								<resource>
 									<directory>../webapp/target/${finished-js-folder}</directory>
@@ -75,9 +91,9 @@
 							</resources>
 						</configuration>
 					</execution>
-					
+
 					<!-- Copy the LICENSE file -->
-					
+
 					<execution>
 						<id>copy-license</id>
 						<phase>package</phase>
@@ -96,12 +112,12 @@
 							</resources>
 						</configuration>
 					</execution>
-					
+
 					<!-- And now we get the HTML Readme file and put it in there too -->
-					
+
 					<execution>
 						<id>copy-readme</id>
-						<phase>generate-resources</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>copy-resources</goal>
 						</goals>
@@ -125,7 +141,7 @@
 				<artifactId>markdown-page-generator-plugin</artifactId>
 				<executions>
 					<execution>
-						<phase>generate-resources</phase>
+						<phase>package</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
@@ -159,7 +175,70 @@
 					<appendAssemblyId>false</appendAssemblyId>
 				</configuration>
 			</plugin>
+
+			<!-- Manually deploy webapp to the development server -->
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>upload-webapp-to-dev</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>upload</goal>
+						</goals>
+						<configuration>
+							<toDir>shera-dev/</toDir>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>upload-release</id>
+			<activation>
+				<property>
+					<name>performRelease</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<!-- Upload the finished release as well -->
+		
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>wagon-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>upload-webapp</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>upload</goal>
+								</goals>
+								<configuration>
+									<toDir>shera/</toDir>
+								</configuration>
+							</execution>
+							<execution>
+								<id>upload-webapp-old</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>upload</goal>
+								</goals>
+								<configuration>
+									<toDir>shera/${project.version}</toDir>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

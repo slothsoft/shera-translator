@@ -60,6 +60,17 @@
 	</dependencyManagement>
 
 	<build>
+
+		<!-- This extension is to upload to FTP -->
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>3.3.3</version>
+			</extension>
+		</extensions>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -69,6 +80,16 @@
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>3.0.0-M1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.3</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -102,11 +123,57 @@
 					<version>3.1.0</version>
 				</plugin>
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>wagon-maven-plugin</artifactId>
+					<version>2.0.0</version>
+				</plugin>
+				<plugin>
 					<groupId>org.jsweet</groupId>
 					<artifactId>jsweet-maven-plugin</artifactId>
 					<version>2.2.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+
+		<plugins>
+
+			<!-- We deploy manually -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+
+			<!-- Our release is special -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<localCheckout>true</localCheckout>
+					<mavenExecutorId>forked-path</mavenExecutorId>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.maven.scm</groupId>
+						<artifactId>maven-scm-provider-gitexe</artifactId>
+						<version>1.9.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
 	</build>
+
+	<scm>
+		<connection>scm:git:git://github.com/slothsoft/shera-translator.git</connection>
+		<developerConnection>scm:git:git@github.com/slothsoft/shera-translator.git</developerConnection>
+		<url>https://github.com/slothsoft/shera-translator</url>
+		<tag>HEAD</tag>
+	</scm>
+
 </project>

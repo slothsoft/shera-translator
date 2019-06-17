@@ -61,15 +61,16 @@ The release contains the following files and folders:
 Releasing is done with the following steps:
 
 1. update readme file to include the version to be release 
-1. remove the snapshot from the files *pom.xml*
-1. create a tag with the version as a name
-1. execute `mvn clean install`
-1. execute `mvn clean install` on `shera-webapp` (no idea why but else README is missing)
-1. the finished ZIP  is *shera-release/target/shera-release-&lt;version&gt;.zip*; it's contents are in *shera-release/target/release/*
-1. update the version to the next development version and commit / push all these changes
-1. copy the webapp to <http://app.slothsoft.de/shera>
-1. copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
+1. execute `mvn release:prepare release:perform`
+1. the finished ZIP  is *shera-release/target/shera-release-&lt;version&gt;.zip*; it's contents are in *shera-release/target/release/*; copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
 
+These steps are done automatically by the Maven release:
+
+1. removes the snapshot from the files *pom.xml*
+1. creates a tag with the version as a name
+1. updates the version to the next development version
+1. commits / pushes all these changes
+1. copies the webapp to <http://app.slothsoft.de/shera> 
 
 
 
