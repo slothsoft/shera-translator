@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.slothsoft.shera</groupId>
 	<artifactId>shera-build</artifactId>
-	<version>0.3.0</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -172,7 +172,7 @@
 		<connection>scm:git:git://github.com/slothsoft/shera-translator.git</connection>
 		<developerConnection>scm:git:git@github.com/slothsoft/shera-translator.git</developerConnection>
 		<url>https://github.com/slothsoft/shera-translator</url>
-		<tag>0.3.0</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 </project>

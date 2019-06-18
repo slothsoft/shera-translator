@@ -63,6 +63,7 @@ Releasing is done with the following steps:
 
 1. update readme file to include the version to be release 
 1. execute `mvn release:prepare release:perform -DscmCommentPrefix="[#00]"`
+1. commit / pushe all changes made during the release
 1. the finished ZIP  is *shera-release/target/shera-release-&lt;version&gt;.zip*; it's contents are in *shera-release/target/release/*; copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
 
 These steps are done automatically by the Maven release:
@@ -70,7 +71,6 @@ These steps are done automatically by the Maven release:
 1. removes the snapshot from the files *pom.xml*
 1. creates a tag with the version as a name
 1. updates the version to the next development version
-1. commits / pushes all these changes
 1. copies the webapp to <http://app.slothsoft.de/shera> 
 
 
