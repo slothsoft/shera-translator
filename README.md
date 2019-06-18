@@ -62,7 +62,7 @@ The release contains the following files and folders:
 Releasing is done with the following steps:
 
 1. update readme file to include the version to be release 
-1. execute `mvn release:prepare release:perform -DscmCommentPrefix=[#00]`
+1. execute `mvn release:prepare release:perform -DscmCommentPrefix="[#00]"`
 1. the finished ZIP  is *shera-release/target/shera-release-&lt;version&gt;.zip*; it's contents are in *shera-release/target/release/*; copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
 
 These steps are done automatically by the Maven release:

@@ -154,6 +154,7 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<localCheckout>true</localCheckout>
+					<pushChanges>false</pushChanges>
 					<mavenExecutorId>forked-path</mavenExecutorId>
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 					<tagNameFormat>@{project.version}</tagNameFormat>
