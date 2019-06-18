@@ -44,6 +44,7 @@ I'm self-organizing using [GitHub issues](https://github.com/slothsoft/shera-tra
 | Version | Release | Web Link |
 | ------- |---------| -------- |
 | **[development](https://github.com/slothsoft/shera-translator/milestones)** | &lt;WIP&gt; | [Web Link](http://app.slothsoft.de/shera-dev/)  |
+| **[0.3.0](https://github.com/slothsoft/shera-translator/milestone/3?closed=1)** | [Words & Groups](https://github.com/slothsoft/shera-translator/releases/tag/0.3.0) | [Web Link](http://app.slothsoft.de/shera-old/0.3.0/) |
 | **[0.2.0](https://github.com/slothsoft/shera-translator/milestone/2?closed=1)** | [Words & Groups](https://github.com/slothsoft/shera-translator/releases/tag/0.2.0) | [Web Link](http://app.slothsoft.de/shera-old/0.2.0/) |
 | **[0.1.0](https://github.com/slothsoft/shera-translator/milestone/1?closed=1)** | [Proof of Concept](https://github.com/slothsoft/shera-translator/releases/tag/0.1.0) | [Web Link](http://app.slothsoft.de/shera-old/0.1.0/) |
 
@@ -61,7 +62,7 @@ The release contains the following files and folders:
 Releasing is done with the following steps:
 
 1. update readme file to include the version to be release 
-1. execute `mvn release:prepare release:perform`
+1. execute `mvn release:prepare release:perform -DscmCommentPrefix=[#00]`
 1. the finished ZIP  is *shera-release/target/shera-release-&lt;version&gt;.zip*; it's contents are in *shera-release/target/release/*; copy the ZIP to <https://github.com/slothsoft/shera-translator/releases>
 
 These steps are done automatically by the Maven release:
