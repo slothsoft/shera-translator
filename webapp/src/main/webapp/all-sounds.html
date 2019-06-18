@@ -8,6 +8,8 @@
 	<script src="lib/html-canvas.js" defer></script>
 	<script src="lib/phonetic-sound.js" defer></script>
 	<script src="lib/phonetic-sound-list.js" defer></script>
+	<script src="lib/i18n.js"></script>
+	<script src="lib/i18n_de.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
@@ -22,7 +24,7 @@
 
 	<div id="header">
 		<div class="content">
-			<img src="style/title.svg"/><h1>First Ones Translator ${project.version}</h1>
+			<img src="style/title.svg"/><h1><script>document.write(i18n.FirstOnesTranslator);</script> ${project.version}</h1>
 	
 			<div class="dropdown right">
 				<button id="main-menu-button" onclick="toggleMenu(event, 'main-menu')" class="drop-button"></button>
@@ -38,7 +40,7 @@
 	</div>
 	
 	<div id="footer">
-		<div class="content">Powered by <a href="http://slothsoft.de">slothsoft.de</a></div>
+		<div class="content"><script>document.write(i18n.PoweredBy);</script> <a href="http://slothsoft.de">slothsoft.de</a></div>
 	</div>
 
 </body>

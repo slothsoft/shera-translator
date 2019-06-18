@@ -137,11 +137,11 @@ function initMainMenu() {
 	var mainMenu = document.getElementById("main-menu");
 	if (mainMenu != null) {
 		var menuHtml = `
-			<a href="index.html">Latin → First Ones</a>
-			<a href="all-sounds.html">All Sounds</a>
+			<a href="index.html">` + i18n.LatinToFirstOnes +  `</a>
+			<a href="all-sounds.html">` + i18n.AllSounds +  `</a>
 			<hr/>
-			<a href="https://github.com/slothsoft/shera-translator/">GitHub Project</a>
-			<a href="https://github.com/slothsoft/shera-translator/issues/">Report Issue</a>
+			<a href="https://github.com/slothsoft/shera-translator/">` + i18n.GitHubProject +  `</a>
+			<a href="https://github.com/slothsoft/shera-translator/issues/">` + i18n.ReportIssue +  `</a>
 		`;
 		// this adds a special style to the active page so it can be styled
 		var sitePath = window.location.pathname;

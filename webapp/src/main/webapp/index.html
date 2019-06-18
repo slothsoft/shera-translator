@@ -8,6 +8,8 @@
 	<script src="lib/html-canvas.js" defer></script>
 	<script src="lib/phonetic-sound.js" defer></script>
 	<script src="lib/phonetic-sound-list.js" defer></script>
+	<script src="lib/i18n.js"></script>
+	<script src="lib/i18n_de.js"></script>
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes"/>
 </head>
@@ -56,7 +58,7 @@
 
 	<div id="header">
 		<div class="content">
-			<img src="style/title.svg"/><h1>First Ones Translator ${project.version}</h1>
+			<img src="style/title.svg"/><h1><script>document.write(i18n.FirstOnesTranslator);</script> ${project.version}</h1>
 	
 			<div class="dropdown right">
 				<button id="main-menu-button" onclick="toggleMenu(event, 'main-menu')" class="drop-button"></button>
@@ -70,12 +72,12 @@
 			<textarea id="inputText" oninput="translateInput()">Shee-Rah</textarea>
 			<div id="settings-wrapper">
 				<div id="settings">
-					<h2>Settings</h2>
+					<h2><script>document.write(i18n.Settings);</script></h2>
 					<table>
 						<col width="25">
-						<tr><td>Language:</td><td><select id="language" onchange="translateInput()">
-						<option value="en" selected="selected">English</option>
-						<option value="de">German</option>
+						<tr><td><script>document.write(i18n.Language);</script>:</td><td><select id="language" onchange="translateInput()">
+						<option value="en" selected="selected"><script>document.write(i18n.LanguageEn);</script></option>
+						<option value="de"><script>document.write(i18n.LanguageDe);</script></option>
 						</select></td></tr>
 					</table>
 				</div>	
@@ -84,8 +86,8 @@
 				
 		<div id="result">
 			<div class="tab">
-				<button class="tab-button" onclick="openTab(event, 'single-sounds')">Sounds</button>
-				<button class="tab-button active" onclick="openTab(event, 'words')">Words</button>
+				<button class="tab-button" onclick="openTab(event, 'single-sounds')"><script>document.write(i18n.Sounds);</script></button>
+				<button class="tab-button active" onclick="openTab(event, 'words')"><script>document.write(i18n.Words);</script></button>
 		  	</div>
 		  	
 			<phonetic-sound-list id="single-sounds" class="tab-content"></phonetic-sound-list>
@@ -97,7 +99,7 @@
 	</div>
 	
 	<div id="footer">
-		<div class="content">Powered by <a href="http://slothsoft.de">slothsoft.de</a></div>
+		<div class="content"><script>document.write(i18n.PoweredBy);</script> <a href="http://slothsoft.de">slothsoft.de</a></div>
 	</div>
 
 </body>
