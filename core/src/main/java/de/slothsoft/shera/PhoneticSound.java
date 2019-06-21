@@ -114,18 +114,19 @@ public enum PhoneticSound {
 
 	},
 
-	E("PET", true) { // see TOO
+	E("PET", false) { // see TOO
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			final int halfWidth = width / 2;
-			final int halfHeight = height / 2;
+			final int ballWidth = width / 3;
+			final int ballHeight = height / 3;
+			final int separator = height / 10;
 
-			canvas.drawOval(0, halfHeight / 2, halfWidth, 3 * halfHeight / 2);
-			canvas.drawOval(halfWidth, halfHeight / 2, width, 3 * halfHeight / 2);
+			canvas.drawOval(ballWidth, 0, width - ballWidth, ballHeight);
+			canvas.drawLine(width / 2, ballHeight, width / 2, ballHeight + separator);
+			canvas.drawOval(ballWidth, ballHeight + separator, width - ballWidth, 2 * ballHeight + separator);
 
-			// the triangle is to small, so draw connection myself
-			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			result.startPointY(2 * ballHeight + separator);
 		}
 
 	},
@@ -286,18 +287,19 @@ public enum PhoneticSound {
 
 	},
 
-	OO("TOO", true) { // see PET
+	OO("TOO", false) { // see PET
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			final int halfWidth = width / 2;
-			final int halfHeight = height / 2;
+			final int ballWidth = width / 3;
+			final int ballHeight = height / 3;
+			final int separator = height / 10;
 
-			canvas.fillOval(0, halfHeight / 2, halfWidth, 3 * halfHeight / 2);
-			canvas.fillOval(halfWidth, halfHeight / 2, width, 3 * halfHeight / 2);
+			canvas.fillOval(ballWidth, 0, width - ballWidth, ballHeight);
+			canvas.drawLine(width / 2, ballHeight, width / 2, ballHeight + separator);
+			canvas.fillOval(ballWidth, ballHeight + separator, width - ballWidth, 2 * ballHeight + separator);
 
-			// the triangle is to small, so draw connection myself
-			canvas.drawLine(halfWidth, 0, halfWidth, height);
+			result.startPointY(2 * ballHeight + separator);
 		}
 
 	},
