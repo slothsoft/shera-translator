@@ -86,7 +86,8 @@ public enum PhoneticSound {
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
-			canvas.drawTriangle(halfWidth, 0, halfWidth, height, 0, height);
+			canvas.drawTriangle(halfWidth, 0, halfWidth, height, -halfWidth / 2, height);
+			result.setStartPointX(-3 * halfWidth / 4); // looks centerish
 		}
 
 	},
@@ -210,11 +211,11 @@ public enum PhoneticSound {
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			CH.drawOn(canvas, width, height, result);
 
-			final int partWidth = width / 5;
-			final int partHeight = height / 5;
-			final int x = 3 * partWidth / 2;
-			final int y = height - 2 * partHeight;
-			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+			final int ballHeight = (int) (SMALL_BALL_RATIO * width);
+			final int x = width / 8;// looks centerish
+			final int y = height - 2 * ballHeight;
+			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
