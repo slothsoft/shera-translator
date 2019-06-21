@@ -23,13 +23,13 @@ public enum PhoneticSound {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			final int partWidth = width / 5;
+			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
 			final int y = height / 2;
-			final int endPoint = width / 2 - partWidth;
+			final int endPoint = width / 2 - ballWidth;
 
 			canvas.drawLine(width / 2, 0, width / 2, y);
-			canvas.drawLine(width / 2, y, width / 2 - partWidth, y);
-			canvas.drawLine(width / 2 - partWidth, y, endPoint, height);
+			canvas.drawLine(width / 2, y, width / 2 - ballWidth, y);
+			canvas.drawLine(width / 2 - ballWidth, y, endPoint, height);
 
 			result.setStartPointX(endPoint - width / 2);
 			result.setSkipConnectionLine(true);
@@ -135,7 +135,11 @@ public enum PhoneticSound {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			canvas.drawOval(0, 0, width, height);
+			final int ballWidth = width / 3;
+			final int ballHeight = height / 3;
+			canvas.drawOval((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
+
+			result.setStartPointY(ballHeight);
 		}
 
 	},
@@ -258,7 +262,11 @@ public enum PhoneticSound {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			canvas.fillOval(0, 0, width, height);
+			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
+			canvas.fillOval((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
+
+			result.setStartPointY(ballHeight);
 		}
 
 	},
@@ -308,7 +316,7 @@ public enum PhoneticSound {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			EE.drawOn(canvas, width, height, result);
+			canvas.drawOval(0, 0, width, height);
 			drawCenterPointOn(canvas, width, height);
 		}
 
@@ -477,6 +485,8 @@ public enum PhoneticSound {
 
 	;
 
+	private static final double SMALL_BALL_RATIO = 0.2;
+
 	private String example;
 	private boolean lineOnly;
 
@@ -502,11 +512,11 @@ public enum PhoneticSound {
 	// used by many symbols
 
 	protected static final void drawCenterPointOn(Canvas canvas, int width, int height) {
-		final int partWidth = width / 5;
-		final int partHeight = height / 5;
-		final int x = (width - partWidth) / 2;
-		final int y = (height - partHeight) / 2;
-		canvas.fillOval(x, y, x + partWidth, y + partHeight);
+		final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+		final int ballHeight = (int) (SMALL_BALL_RATIO * height);
+		final int x = (width - ballWidth) / 2;
+		final int y = (height - ballHeight) / 2;
+		canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
 	}
 
 	public String getDisplayName() {
