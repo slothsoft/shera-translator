@@ -269,10 +269,7 @@ public enum PhoneticSound {
 			final int halfWidth = width / 2;
 			final int halfHeight = height / 2;
 			canvas.fillTriangle(0, 0, width, 0, halfWidth, halfHeight);
-
-			// the triangle is to small, so draw connection myself
-			canvas.drawLine(halfWidth, halfHeight, halfWidth, height);
-			result.skipConnectionLine(true);
+			result.startPointY(halfHeight);
 		}
 
 	},
@@ -376,10 +373,7 @@ public enum PhoneticSound {
 			final int halfWidth = width / 2;
 			final int halfHeight = height / 2;
 			canvas.drawTriangle(0, 0, width, 0, halfWidth, halfHeight);
-
-			// the triangle is to small, so draw connection myself
-			canvas.drawLine(halfWidth, halfHeight, halfWidth, height);
-			result.skipConnectionLine(true);
+			result.startPointY(halfHeight);
 		}
 
 	},
