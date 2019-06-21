@@ -14,11 +14,14 @@
 			<groupId>de.slothsoft.shera</groupId>
 			<artifactId>shera-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>de.slothsoft.shera</groupId>
+			<artifactId>shera-javaapp</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<sourceDirectory>src/main/webapp</sourceDirectory>
-
 
 		<plugins>
 		

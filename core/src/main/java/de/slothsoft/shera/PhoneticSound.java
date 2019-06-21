@@ -501,7 +501,6 @@ public enum PhoneticSound {
 
 	// we need these values everywhere
 
-	@SuppressWarnings("unused")
 	abstract void drawOn(Canvas canvas, int width, int height, NextDrawing result);
 
 	// used by many symbols
