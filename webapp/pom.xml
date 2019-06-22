@@ -84,15 +84,12 @@
 							<webappTargetDir>${project.build.directory}/${finished-js-folder}</webappTargetDir>
 							<nosuffix>true</nosuffix>
 							<skipMerge>true</skipMerge>
-							<jsEngine>CLOSURE</jsEngine>
 							
 							<!-- JavaScript sources -->
 							<jsSourceDir>/</jsSourceDir>
 							<jsIncludes>**/*.js</jsIncludes>
 							<jsExcludes>
 								<jsExcludes>.tsc-rootfile.js</jsExcludes>
-								<!-- TODO: doesn't work right now -->
-								<jsExcludes>lib/phonetic-sound*.js</jsExcludes>
 							</jsExcludes>
 							
 							<!-- CSS sources -->
@@ -106,32 +103,11 @@
 				</executions>
 			</plugin>
 			
-			<!-- This copies the file that couldn't be minified -->
+			<!-- Copy the HTML page(s) and images in the webapp folder -->
 			
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
-					<execution>
-						<id>copy-broken-files</id>
-						<phase>package</phase>
-						<goals>
-							<goal>copy-resources</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>target/${finished-js-folder}</outputDirectory>
-							<resources>
-								<resource>
-									<directory>src/main/webapp</directory>
-									<includes>
-										<include>lib/phonetic-sound*.js</include>
-									</includes>
-								</resource>
-							</resources>
-						</configuration>
-					</execution>
-
-					<!-- Copy the HTML page(s) and images in the webapp folder -->
-
 					<execution>
 						<id>copy-html</id>
 						<phase>package</phase>

@@ -16,20 +16,17 @@ import de.slothsoft.shera.dc.NextDrawing;
 
 public enum PhoneticSound implements Constants {
 
-	// TODO: I calculated the point size as "partWidth" / "partHeight" alot
-	// maybe that's better of as an offset on #drawCenterPointOn
-
 	A("SAD", true) {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+			final int offset = (int) (SMALL_BALL_RATIO * width);
 			final int y = height / 2;
-			final int endPoint = width / 2 - ballWidth;
+			final int endPoint = width / 2 - offset;
 
 			canvas.drawLine(width / 2, 0, width / 2, y);
-			canvas.drawLine(width / 2, y, width / 2 - ballWidth, y);
-			canvas.drawLine(width / 2 - ballWidth, y, endPoint, height);
+			canvas.drawLine(width / 2, y, width / 2 - offset, y);
+			canvas.drawLine(width / 2 - offset, y, endPoint, height);
 
 			result.setStartPointX(endPoint - width / 2);
 			result.setSkipConnectionLine(true);
@@ -41,14 +38,14 @@ public enum PhoneticSound implements Constants {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			final int partWidth = width / 5;
-			final int partHeight = height / 5;
-			final int y = (height - partHeight) / 2;
-			final int endPoint = width / 2 - partWidth;
+			final int offsetX = (int) (SMALL_BALL_RATIO * width);
+			final int offsetY = (int) (SMALL_BALL_RATIO * height);
+			final int y = (height - offsetY) / 2;
+			final int endPoint = width / 2 - offsetX;
 
 			canvas.drawLine(width / 2, 0, width / 2, y);
-			canvas.drawLine(width / 2, y, width / 2 - partWidth, y + partHeight);
-			canvas.drawLine(width / 2 - partWidth, y + partHeight, endPoint, height);
+			canvas.drawLine(width / 2, y, width / 2 - offsetX, y + offsetY);
+			canvas.drawLine(width / 2 - offsetX, y + offsetY, endPoint, height);
 
 			result.setStartPointX(endPoint - width / 2);
 			result.setSkipConnectionLine(true);
@@ -163,11 +160,11 @@ public enum PhoneticSound implements Constants {
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			K.drawOn(canvas, width, height, result);
 
-			final int partWidth = width / 5;
-			final int partHeight = height / 5;
-			final int x = (width - partWidth) / 2;
-			final int y = 2 * height / 3 - partHeight / 2;
-			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
+			final int x = (width - ballWidth) / 2;
+			final int y = 2 * height / 3 - ballHeight / 2;
+			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
@@ -475,11 +472,11 @@ public enum PhoneticSound implements Constants {
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			SH.drawOn(canvas, width, height, result);
 
-			final int partWidth = width / 5;
-			final int partHeight = height / 5;
-			final int x = (width - partWidth) / 2;
-			final int y = partHeight;
-			canvas.fillOval(x, y, x + partWidth, y + partHeight);
+			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
+			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
+			final int x = (width - ballWidth) / 2;
+			final int y = ballHeight * 2 / 3;
+			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
