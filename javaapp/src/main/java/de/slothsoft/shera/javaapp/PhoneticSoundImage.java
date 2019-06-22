@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import de.slothsoft.shera.PhoneticSound;
 import de.slothsoft.shera.dc.Canvas;
 import de.slothsoft.shera.dc.DrawingContext;
+import de.slothsoft.shera.dc.LogCanvas;
+import de.slothsoft.shera.dc.NextDrawing;
 
 public class PhoneticSoundImage extends JLabel {
 
@@ -35,8 +37,12 @@ public class PhoneticSoundImage extends JLabel {
 
 			final int nettoSymbolSize = this.symbolSize - 2 * this.border - 1;
 
+			final NextDrawing nextDrawing = this.content
+					.drawOn(new DrawingContext(new LogCanvas()).width(nettoSymbolSize).height(nettoSymbolSize));
+
 			final Canvas canvas = new SwingCanvas(g);
-			canvas.translate(this.border, this.border);
+			canvas.translate(this.border - nextDrawing.getStartPointX(),
+					this.border + ((nettoSymbolSize - nextDrawing.getStartPointY()) / 2));
 			this.content.drawOn(new DrawingContext(canvas).width(nettoSymbolSize).height(nettoSymbolSize));
 		}
 	}

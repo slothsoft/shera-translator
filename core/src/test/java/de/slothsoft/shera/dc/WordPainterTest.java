@@ -12,7 +12,7 @@ public class WordPainterTest {
 
 	@Test
 	public void testCalculateMetricsSingle() throws Exception {
-		final WordPainterMetrics metrics = this.painter.calculateMetrics(new PhoneticSound[]{PhoneticSound.A});
+		final WordPainterMetrics metrics = this.painter.calculateMetrics(new PhoneticSound[]{PhoneticSound.O});
 
 		Assert.assertNotNull(metrics);
 		Assert.assertEquals(DrawingContext.PREF_SYMBOL_SIZE, metrics.width);
@@ -24,7 +24,7 @@ public class WordPainterTest {
 	public void testCalculateMetricsSingleOtherSize() throws Exception {
 		final int symbolSize = 10;
 		final WordPainterMetrics metrics = this.painter.symbolSize(symbolSize)
-				.calculateMetrics(new PhoneticSound[]{PhoneticSound.A});
+				.calculateMetrics(new PhoneticSound[]{PhoneticSound.O});
 
 		Assert.assertNotNull(metrics);
 		Assert.assertEquals(symbolSize, metrics.width);

@@ -60,10 +60,14 @@ customElements.define('phonetic-sound',
 	    // paint the symbols
 		var border = 2;
 		var nettoSymbolSize = this.symbolSize - 2 * border;
+
+		var dc = new de.slothsoft.shera.dc.DrawingContext(new de.slothsoft.shera.dc.LogCanvas()).height(nettoSymbolSize).width(nettoSymbolSize);
+		var nextDrawing = soundObject.drawOn(dc);
+
 	    var ctx = prepare2DContextOfCanvas(this.canvas);
 	    var canvas = new HtmlCanvas(ctx);
-	    canvas.translate(border, border);
-		var dc = new de.slothsoft.shera.dc.DrawingContext(canvas).height(nettoSymbolSize).width(nettoSymbolSize);
+	    canvas.translate(border - nextDrawing.getStartPointX(), border + (nettoSymbolSize - nextDrawing.getStartPointY()) / 2);
+		dc = new de.slothsoft.shera.dc.DrawingContext(canvas).height(nettoSymbolSize).width(nettoSymbolSize);
 		soundObject.drawOn(dc);
     }
 });

@@ -85,17 +85,14 @@ public class WordPainter {
 			final NextDrawing next = sound.drawOn(dc);
 			height += next.startPointY;
 
-			// we don't need to calculate anything for last symbol
-			if (i < word.length - 1) {
-				// add space for connection line if necessary
-				if (!next.skipConnectionLine) {
-					height += this.lineSize;
-				}
-				// shift everything is startPointX is not default
-				currentX += next.startPointX;
-				minX = Math.min(minX, currentX);
-				maxX = Math.max(maxX, currentX);
+			// add space for connection line if necessary
+			if (!next.skipConnectionLine) {
+				height += this.lineSize;
 			}
+			// shift everything is startPointX is not default
+			currentX += next.startPointX;
+			minX = Math.min(minX, currentX);
+			maxX = Math.max(maxX, currentX);
 		}
 
 		return new WordPainterMetrics(maxX - minX + this.symbolSize, height, -minX);
