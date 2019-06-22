@@ -14,7 +14,7 @@ import de.slothsoft.shera.dc.NextDrawing;
  * @since 0.1.0
  */
 
-public enum PhoneticSound {
+public enum PhoneticSound implements Constants {
 
 	// TODO: I calculated the point size as "partWidth" / "partHeight" alot
 	// maybe that's better of as an offset on #drawCenterPointOn
@@ -485,8 +485,6 @@ public enum PhoneticSound {
 	},
 
 	;
-
-	private static final double SMALL_BALL_RATIO = 0.2;
 
 	private String example;
 	private boolean lineOnly;
