@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 
 import de.slothsoft.shera.PhoneticSound;
-import de.slothsoft.shera.dc.Canvas;
 import de.slothsoft.shera.dc.DrawingContext;
 import de.slothsoft.shera.dc.LogCanvas;
 import de.slothsoft.shera.dc.NextDrawing;
@@ -22,28 +21,28 @@ public class PhoneticSoundImage extends JLabel {
 
 	public PhoneticSoundImage(PhoneticSound content) {
 		this.content = content;
-		setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
-		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 		setSymbolSize(DrawingContext.PREF_SYMBOL_SIZE);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		g.setColor(getBackground());
-		g.fillRect(0, 0, getWidth(), getHeight());
+		paintSoundOnGraphics(g, this.content, this.symbolSize, this.border);
+	}
 
-		if (this.content != null) {
-			g.setColor(getForeground());
+	static void paintSoundOnGraphics(Graphics graphics, PhoneticSound sound, int symbolSize, int border) {
+		graphics.setColor(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
+		graphics.fillRect(0, 0, symbolSize, symbolSize);
 
-			final int nettoSymbolSize = this.symbolSize - 2 * this.border - 1;
+		if (sound != null) {
+			graphics.setColor(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
+			final int nettoSymbolSize = symbolSize - 2 * border - 1;
 
-			final NextDrawing nextDrawing = this.content
+			final NextDrawing nextDrawing = sound
 					.drawOn(new DrawingContext(new LogCanvas()).width(nettoSymbolSize).height(nettoSymbolSize));
 
-			final Canvas canvas = new SwingCanvas(g);
-			canvas.translate(this.border - nextDrawing.getStartPointX(),
-					this.border + ((nettoSymbolSize - nextDrawing.getStartPointY()) / 2));
-			this.content.drawOn(new DrawingContext(canvas).width(nettoSymbolSize).height(nettoSymbolSize));
+			graphics.translate(border - nextDrawing.getStartPointX(),
+					border + ((nettoSymbolSize - nextDrawing.getStartPointY()) / 2));
+			sound.drawOn(new DrawingContext(new SwingCanvas(graphics)).width(nettoSymbolSize).height(nettoSymbolSize));
 		}
 	}
 

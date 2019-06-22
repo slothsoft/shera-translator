@@ -12,7 +12,6 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 import de.slothsoft.shera.PhoneticSound;
-import de.slothsoft.shera.dc.DrawingContext;
 
 public class SoundGenerator {
 
@@ -32,14 +31,8 @@ public class SoundGenerator {
 		for (final PhoneticSound sound : PhoneticSound.values()) {
 			// Create SVG graphics and initialize canvas
 			final SVGGraphics2D graphics = new SVGGraphics2D(document);
-			graphics.setColor(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
-			graphics.fillRect(0, 0, IMAGE_SIZE, IMAGE_SIZE);
 			graphics.setSVGCanvasSize(new Dimension(IMAGE_SIZE, IMAGE_SIZE));
-			graphics.setColor(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
-			graphics.translate(IMAGE_PADDING, IMAGE_PADDING);
-
-			sound.drawOn(new DrawingContext(new SwingCanvas(graphics)).width(IMAGE_SIZE - 2 * IMAGE_PADDING)
-					.height(IMAGE_SIZE - 2 * IMAGE_PADDING));
+			PhoneticSoundImage.paintSoundOnGraphics(graphics, sound, IMAGE_SIZE, IMAGE_PADDING);
 
 			// Finally, stream out SVG to a file
 			try (FileOutputStream out = new FileOutputStream(
