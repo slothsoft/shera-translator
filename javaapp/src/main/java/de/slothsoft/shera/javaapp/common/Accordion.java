@@ -34,8 +34,8 @@ public class Accordion extends JPanel {
 	private final JLabel spanner = new JLabel();
 	private final GridBagData spannerData = GridBagData.forPanel(0, 0);
 
-	private boolean defaultExpanded = true;
-	private int headerHeight = 20;
+	boolean defaultExpanded = true;
+	int headerHeight = 20;
 	private Image openImage;
 	private Image closedImage;
 	private BiConsumer<Page, Graphics> pageHeaderPainter = Page::defaultPaintComponent;

@@ -78,8 +78,8 @@ public class MainFrame extends JFrame {
 		}
 
 		@Override
-		public Component getListCellRendererComponent(JList list, Link value, int index, boolean isSelected,
-				boolean cellHasFocus) {
+		public Component getListCellRendererComponent(JList<? extends Link> list, Link value, int index,
+				boolean isSelected, boolean cellHasFocus) {
 			this.link.setBackground(new Color(217, 219, 241));
 			this.link.setText(value.getDisplayName());
 			return this.link;
