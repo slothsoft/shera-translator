@@ -10,7 +10,7 @@ import java.util.List;
  * @since 0.1.0
  */
 
-public class LogCanvas implements Canvas {
+public class LogCanvas extends AbstractCanvas {
 
 	private final List<String> log = new ArrayList<>();
 

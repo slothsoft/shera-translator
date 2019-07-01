@@ -85,8 +85,6 @@ function prepare2DContextOfCanvas(canvas) {
 	var ctx = canvas.getContext('2d');
 	ctx.fillStyle = "#26215D";
 	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "white";
-	ctx.strokeStyle = "white";
 	return ctx;
 }
 

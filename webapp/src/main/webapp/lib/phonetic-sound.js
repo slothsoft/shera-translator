@@ -66,6 +66,9 @@ customElements.define('phonetic-sound',
 
 	    var ctx = prepare2DContextOfCanvas(this.canvas);
 	    var canvas = new HtmlCanvas(ctx);
+	    canvas.setBackground("#26215D");
+	    canvas.setForeground("white");
+		
 	    canvas.translate(border - nextDrawing.getStartPointX(), border + (nettoSymbolSize - nextDrawing.getStartPointY()) / 2);
 		dc = new de.slothsoft.shera.dc.DrawingContext(canvas).height(nettoSymbolSize).width(nettoSymbolSize);
 		soundObject.drawOn(dc);

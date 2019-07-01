@@ -7,7 +7,6 @@ import java.util.Objects;
 import javax.swing.JPanel;
 
 import de.slothsoft.shera.Word;
-import de.slothsoft.shera.dc.Canvas;
 import de.slothsoft.shera.dc.WordPainter;
 
 public class WordControl extends JPanel {
@@ -32,7 +31,9 @@ public class WordControl extends JPanel {
 		if (this.content != null) {
 			g.setColor(getForeground());
 
-			final Canvas canvas = new SwingCanvas(g);
+			final SwingCanvas canvas = new SwingCanvas(g);
+			canvas.setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
+			canvas.setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 			canvas.translate(2, 2);
 
 			final WordPainter painter = new WordPainter(canvas);
