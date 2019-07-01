@@ -16,7 +16,7 @@ import de.slothsoft.shera.dc.NextDrawing;
 
 public enum PhoneticSound implements Constants {
 
-	A("SAD", true) {
+	A("SAD", true, false, false) {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -34,7 +34,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	AH("ALL", true) {
+	AH("ALL", true, false, false) {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -53,7 +53,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	AY("SAY", true) { // SEE AI, BOY
+	AY("SAY", true, false, false) { // SEE AI, BOY
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -68,7 +68,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	B { // see M, P
+	B(null, false, true, true) { // see M, P
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -78,28 +78,30 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	CH { // see J
+	CH(null, false, false, false) { // see J
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
+			canvas.fillTriangle(halfWidth, 0, halfWidth, height, -halfWidth / 2, height);
 			canvas.drawTriangle(halfWidth, 0, halfWidth, height, -halfWidth / 2, height);
 			result.setStartPointX(-3 * halfWidth / 4); // looks centerish
 		}
 
 	},
 
-	D { // see H, T
+	D(null, false, true, true) { // see H, T
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.fillRectangle(0, 0, width, height);
 			canvas.drawRectangle(0, 0, width, height);
 			drawCenterPointOn(canvas, width, height);
 		}
 
 	},
 
-	DH { // see F, V
+	DH(null, false, true, true) { // see F, V
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -112,7 +114,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	E("PET", false) { // see TOO
+	E("PET", false, true, false) { // see TOO
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -120,8 +122,10 @@ public enum PhoneticSound implements Constants {
 			final int ballHeight = height / 3;
 			final int separator = height / 10;
 
+			canvas.fillOval(ballWidth, 0, width - ballWidth, ballHeight);
 			canvas.drawOval(ballWidth, 0, width - ballWidth, ballHeight);
 			canvas.drawLine(width / 2, ballHeight, width / 2, ballHeight + separator);
+			canvas.fillOval(ballWidth, ballHeight + separator, width - ballWidth, 2 * ballHeight + separator);
 			canvas.drawOval(ballWidth, ballHeight + separator, width - ballWidth, 2 * ballHeight + separator);
 
 			result.startPointY(2 * ballHeight + separator);
@@ -129,12 +133,13 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	EE("FEET", false) { // see N, GO
+	EE("FEET", false, true, true) { // see N, GO
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int ballWidth = width / 3;
 			final int ballHeight = height / 3;
+			canvas.fillOval((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
 			canvas.drawOval((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
 
 			result.setStartPointY(ballHeight);
@@ -142,7 +147,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	F { // see DH, V
+	F(null, false, true, true) { // see DH, V
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -154,7 +159,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	G { // see K
+	G(null, false, true, true) { // see K
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -164,31 +169,31 @@ public enum PhoneticSound implements Constants {
 			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
 			final int x = (width - ballWidth) / 2;
 			final int y = 2 * height / 3 - ballHeight / 2;
-			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
+			canvas.fillOvalWithForeground(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
 
-	H { // see T, D
+	H(null, false, true, true) { // see T, D
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
-			canvas.fillRectangle(0, 0, width, height);
+			canvas.fillRectangleWithForeground(0, 0, width, height);
 		}
 
 	},
 
-	I("LIT", false) { // see S
+	I("LIT", false, true, true) { // see S
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int startX = width / 2;
-			canvas.fillTriangle(startX, 0, width, height, 0, height);
+			canvas.fillTriangleWithForeground(startX, 0, width, height, 0, height);
 		}
 
 	},
 
-	AI("I", true) { // see SAY
+	AI("I", true, false, false) { // see SAY
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -196,13 +201,13 @@ public enum PhoneticSound implements Constants {
 			final int halfHeight = height / 2;
 			final int oneThirdHeight = height / 3;
 			canvas.drawLine(halfWidth, 0, halfWidth, height);
-			canvas.fillTriangle(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, halfHeight, halfWidth,
-					2 * oneThirdHeight);
+			canvas.fillTriangleWithForeground(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, halfHeight,
+					halfWidth, 2 * oneThirdHeight);
 		}
 
 	},
 
-	J { // see CH
+	J(null, false, false, false) { // see CH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -212,12 +217,12 @@ public enum PhoneticSound implements Constants {
 			final int ballHeight = (int) (SMALL_BALL_RATIO * width);
 			final int x = width / 8;// looks centerish
 			final int y = height - 2 * ballHeight;
-			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
+			canvas.fillOvalWithForeground(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
 
-	K { // see G
+	K(null, false, true, true) { // see G
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -231,7 +236,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	L { // see R
+	L(null, false, true, true) { // see R
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -244,44 +249,44 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	M { // see B, P
+	M(null, false, true, true) { // see B, P
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
 			final int halfHeight = height / 2;
-			canvas.fillTriangle(halfWidth, 0, width, halfHeight, 0, halfWidth);
-			canvas.fillTriangle(halfWidth, height, 0, halfWidth, width, halfHeight);
+			canvas.fillTriangleWithForeground(halfWidth, 0, width, halfHeight, 0, halfWidth);
+			canvas.fillTriangleWithForeground(halfWidth, height, 0, halfWidth, width, halfHeight);
 		}
 
 	},
 
-	N { // see FEET
+	N(null, false, true, true) { // see FEET
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int ballWidth = (int) (SMALL_BALL_RATIO * width);
 			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
-			canvas.fillOval((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
+			canvas.fillOvalWithForeground((width - ballWidth) / 2, 0, (width + ballWidth) / 2, ballHeight);
 
 			result.setStartPointY(ballHeight);
 		}
 
 	},
 
-	NG { // see SH, ZH
+	NG(null, false, true, false) { // see SH, ZH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
 			final int halfHeight = height / 2;
-			canvas.fillTriangle(0, 0, width, 0, halfWidth, halfHeight);
+			canvas.fillTriangleWithForeground(0, 0, width, 0, halfWidth, halfHeight);
 			result.startPointY(halfHeight);
 		}
 
 	},
 
-	O("GOOD", true) {
+	O("GOOD", true, false, false) {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -293,7 +298,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	OO("TOO", false) { // see PET
+	OO("TOO", false, true, false) { // see PET
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -301,26 +306,28 @@ public enum PhoneticSound implements Constants {
 			final int ballHeight = height / 3;
 			final int separator = height / 10;
 
-			canvas.fillOval(ballWidth, 0, width - ballWidth, ballHeight);
+			canvas.fillOvalWithForeground(ballWidth, 0, width - ballWidth, ballHeight);
 			canvas.drawLine(width / 2, ballHeight, width / 2, ballHeight + separator);
-			canvas.fillOval(ballWidth, ballHeight + separator, width - ballWidth, 2 * ballHeight + separator);
+			canvas.fillOvalWithForeground(ballWidth, ballHeight + separator, width - ballWidth,
+					2 * ballHeight + separator);
 
 			result.startPointY(2 * ballHeight + separator);
 		}
 
 	},
 
-	OW("GO", false) { // see N, FEET
+	OW("GO", false, true, true) { // see N, FEET
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.fillOval(0, 0, width, height);
 			canvas.drawOval(0, 0, width, height);
 			drawCenterPointOn(canvas, width, height);
 		}
 
 	},
 
-	OU("HOUSE", true) { // see FUN
+	OU("HOUSE", true, false, false) { // see FUN
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -330,7 +337,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	OY("BOY", true) { // SEE AI, SAY
+	OY("BOY", true, false, false) { // SEE AI, SAY
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -340,7 +347,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	P { // see B, M
+	P(null, false, true, true) { // see B, M
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -354,7 +361,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	R { // see L
+	R(null, false, true, true) { // see L
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -364,38 +371,41 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	S { // see LIT, Z, TH, W
+	S(null, false, true, true) { // see LIT, Z, TH, W
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int startX = width / 2;
+			canvas.fillTriangle(startX, 0, width, height, 0, height);
 			canvas.drawTriangle(startX, 0, width, height, 0, height);
 		}
 
 	},
 
-	SH { // see NG, ZH
+	SH(null, false, true, false) { // see NG, ZH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
 			final int halfHeight = height / 2;
+			canvas.fillTriangle(0, 0, width, 0, halfWidth, halfHeight);
 			canvas.drawTriangle(0, 0, width, 0, halfWidth, halfHeight);
 			result.startPointY(halfHeight);
 		}
 
 	},
 
-	T { // see H, D
+	T(null, false, true, true) { // see H, D
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
+			canvas.fillRectangle(0, 0, width, height);
 			canvas.drawRectangle(0, 0, width, height);
 		}
 
 	},
 
-	TH { // see LIT, Z, S, W
+	TH(null, false, true, true) { // see LIT, Z, S, W
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -408,7 +418,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	U("FUN", true) { // see HOUSE
+	U("FUN", true, false, false) { // see HOUSE
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -423,7 +433,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	V { // see F, DH
+	V(null, false, true, true) { // see F, DH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -433,7 +443,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	W { // see LIT, Z, S, TH
+	W(null, false, true, true) { // see LIT, Z, S, TH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -444,19 +454,20 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	Y("YES", true) {
+	Y("YES", true, false, false) {
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
 			final int halfWidth = width / 2;
 			final int oneThirdHeight = height / 3;
 			canvas.drawLine(halfWidth, 0, halfWidth, height);
-			canvas.fillRectangle(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2, 2 * oneThirdHeight);
+			canvas.fillRectangleWithForeground(halfWidth, oneThirdHeight, halfWidth + halfWidth / 2,
+					2 * oneThirdHeight);
 		}
 
 	},
 
-	Z { // see LIT, S
+	Z(null, false, true, true) { // see LIT, S
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -466,7 +477,7 @@ public enum PhoneticSound implements Constants {
 
 	},
 
-	ZH { // see NG, SH
+	ZH(null, false, true, false) { // see NG, SH
 
 		@Override
 		void drawOn(Canvas canvas, int width, int height, NextDrawing result) {
@@ -476,23 +487,23 @@ public enum PhoneticSound implements Constants {
 			final int ballHeight = (int) (SMALL_BALL_RATIO * height);
 			final int x = (width - ballWidth) / 2;
 			final int y = ballHeight * 2 / 3;
-			canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
+			canvas.fillOvalWithForeground(x, y, x + ballWidth, y + ballHeight);
 		}
 
 	},
 
 	;
 
-	private String example;
-	private boolean lineOnly;
+	private final String example;
+	private final boolean lineOnly;
+	private final boolean validEnd;
+	private final boolean allowDrawingFromCenter;
 
-	private PhoneticSound() {
-		this(null, false);
-	}
-
-	private PhoneticSound(String example, boolean lineOnly) {
+	private PhoneticSound(String example, boolean lineOnly, boolean validEnd, boolean allowDrawingFromCenter) {
 		this.example = example;
 		this.lineOnly = lineOnly;
+		this.validEnd = validEnd;
+		this.allowDrawingFromCenter = allowDrawingFromCenter;
 	}
 
 	public NextDrawing drawOn(DrawingContext dc) {
@@ -512,7 +523,7 @@ public enum PhoneticSound implements Constants {
 		final int ballHeight = (int) (SMALL_BALL_RATIO * height);
 		final int x = (width - ballWidth) / 2;
 		final int y = (height - ballHeight) / 2;
-		canvas.fillOval(x, y, x + ballWidth, y + ballHeight);
+		canvas.fillOvalWithForeground(x, y, x + ballWidth, y + ballHeight);
 	}
 
 	public String getDisplayName() {
@@ -521,5 +532,13 @@ public enum PhoneticSound implements Constants {
 
 	public String getExample() {
 		return this.example;
+	}
+
+	public boolean isValidEnd() {
+		return this.validEnd;
+	}
+
+	public boolean isAllowDrawingFromCenter() {
+		return this.allowDrawingFromCenter;
 	}
 }

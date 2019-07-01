@@ -5,9 +5,10 @@
  * @see bundle.js
  */
 
-class HtmlCanvas {
+class HtmlCanvas extends de.slothsoft.shera.dc.AbstractCanvas{
 	 
     constructor(canvas) {
+        super();
         this.canvas = canvas;
     }
 
@@ -38,7 +39,7 @@ class HtmlCanvas {
     	this.canvas.fillRect(x1, y1, x2-x1, y2-y1);
 		this.canvas.fill();
     }
-    
+
     drawRectangle(x1, y1, x2, y2) {
     	this.canvas.rect(x1, y1, x2-x1, y2-y1);
 		this.canvas.stroke();
@@ -70,6 +71,22 @@ class HtmlCanvas {
 
     translate(x, y) {
     	this.canvas.translate(x, y);
+    }
+
+    getBackground() {
+        return this.canvas.fillStyle;
+    }
+
+    setBackground(background) {
+        this.canvas.fillStyle = background;
+    }
+
+    getForeground() {
+        return this.canvas.strokeStyle;
+    }
+
+    setForeground(foreground) {
+    	this.canvas.strokeStyle = foreground;
     }
 }
 HtmlCanvas["__interfaces"] = ["de.slothsoft.shera.dc.Canvas"];
