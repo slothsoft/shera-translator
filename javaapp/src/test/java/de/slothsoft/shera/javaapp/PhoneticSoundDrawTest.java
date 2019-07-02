@@ -72,7 +72,9 @@ public class PhoneticSoundDrawTest {
 		}
 
 		final BufferedImage expectedImage;
-		try (InputStream input = getClass().getResourceAsStream("letters/" + this.sound + ".png")) {
+		final String fileName = "letters/" + this.sound + "." + IMAGE_FORMAT.toLowerCase();
+		try (InputStream input = getClass().getResourceAsStream(fileName)) {
+			Assert.assertNotNull("Could not find image " + fileName, input);
 			expectedImage = ImageIO.read(input);
 		}
 
