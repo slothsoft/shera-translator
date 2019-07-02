@@ -24,7 +24,11 @@ public class WordGrouperTest {
 		this.noAllowDrawingFromCenter = findSound(PhoneticSound::isAllowDrawingFromCenter, false);
 	}
 
+<<<<<<< HEAD
 	static PhoneticSound findSound(Predicate<PhoneticSound> property, boolean value) {
+=======
+	private static PhoneticSound findSound(Predicate<PhoneticSound> property, boolean value) {
+>>>>>>> branch 'master' of https://github.com/slothsoft/shera-translator.git
 		for (final PhoneticSound sound : PhoneticSound.values())
 			if (property.test(sound) == value) return sound;
 		Assert.fail("Could not find sound with property: " + property);
