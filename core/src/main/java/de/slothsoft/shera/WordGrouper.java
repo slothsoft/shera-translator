@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  * Groups a {@link Word} into groups that can be drawn beautifully.
  *
+ * @author <a href="mailto:s.schulz@slothsoft.de">Stef Schulz</a>
  * @since 0.4.0
  */
 
