@@ -60,12 +60,15 @@
 				</executions>
 			</plugin>
 
-			<!-- Execute the letter generator to generate SVG of the sounds -->
+			<!-- Execute the letter generators -->
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<executions>
+				
+					<!-- Execute the letter generator to generate SVG of the sounds -->
+			
 					<execution>
 						<id>generate-sound-svg</id>
 						<phase>package</phase>
@@ -74,6 +77,19 @@
 						</goals>
 						<configuration>
 							<mainClass>de.slothsoft.shera.javaapp.SoundGenerator</mainClass>
+						</configuration>
+					</execution>
+					
+					<!-- Execute the letter generator to generate PNG of all the sounds -->
+					
+					<execution>
+						<id>generate-sounds-png</id>
+						<phase>package</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>de.slothsoft.shera.javaapp.AllSoundsGenerator</mainClass>
 						</configuration>
 					</execution>
 				</executions>
