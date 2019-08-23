@@ -86,4 +86,35 @@ public interface Canvas {
 	 */
 
 	void setForeground(String foreground);
+
+	/**
+	 * Returns the size of the canvas.
+	 *
+	 * @return array where index 0 is width and index 1 is height
+	 * @since 0.4.0
+	 * @see #getWidth()
+	 * @see #getHeight()
+	 */
+
+	int[] getSize();
+
+	/**
+	 * Returns the width of the canvas.
+	 *
+	 * @return width
+	 * @since 0.4.0
+	 * @see #getSize()
+	 */
+
+	int getWidth();
+
+	/**
+	 * Returns the height of the canvas.
+	 *
+	 * @return height
+	 * @since 0.4.0
+	 * @see #getSize()
+	 */
+
+	int getHeight();
 }

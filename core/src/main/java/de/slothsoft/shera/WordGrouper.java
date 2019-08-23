@@ -1,6 +1,7 @@
 package de.slothsoft.shera;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Groups a {@link Word} into groups that can be drawn beautifully.
@@ -17,9 +18,7 @@ public class WordGrouper {
 
 	static final int[] EMPTY_INT_ARRAY = new int[0];
 
-	private int preferredGroupSize = 4;
-	private int minGroupSize = 2;
-	private int maxGroupSize = 5;
+	private WordGrouperConfig config = new WordGrouperConfig();
 
 	int[] preferredIndexMap;
 
@@ -28,13 +27,13 @@ public class WordGrouper {
 	}
 
 	private void recalculatePreferredIndexMap() {
-		final Integer[] bigMap = new Integer[this.maxGroupSize - this.minGroupSize + 1];
+		final Integer[] bigMap = new Integer[this.config.maxGroupSize - this.config.minGroupSize + 1];
 		for (int i = 0; i < bigMap.length; i++) {
-			bigMap[i] = Integer.valueOf(this.minGroupSize + i);
+			bigMap[i] = Integer.valueOf(this.config.minGroupSize + i);
 		}
 		Arrays.sort(bigMap, (i1, i2) -> {
-			int compare = Math.abs(this.preferredGroupSize - i1.intValue())
-					- Math.abs(this.preferredGroupSize - i2.intValue());
+			int compare = Math.abs(this.config.preferredGroupSize - i1.intValue())
+					- Math.abs(this.config.preferredGroupSize - i2.intValue());
 
 			if (compare == 0) {
 				compare = i2.compareTo(i1);
@@ -65,8 +64,8 @@ public class WordGrouper {
 		// return super early
 		if (result.malus == 0) return result;
 
-		for (int i = this.minGroupSize; i <= this.maxGroupSize; i++) {
-			final int preferredIndex = index + getPreferredIndex(i - this.minGroupSize);
+		for (int i = this.config.minGroupSize; i <= this.config.maxGroupSize; i++) {
+			final int preferredIndex = index + getPreferredIndex(i - this.config.minGroupSize);
 
 			if (preferredIndex > sounds.length) {
 				continue;
@@ -112,12 +111,12 @@ public class WordGrouper {
 		int malus = 0;
 		// first base on length
 		final int length = endIndex - startIndex;
-		if (length < this.minGroupSize) {
+		if (length < this.config.minGroupSize) {
 			malus = MALUS_TOO_SMALL;
-		} else if (length > this.maxGroupSize) {
+		} else if (length > this.config.maxGroupSize) {
 			malus = MALUS_TOO_BIG;
 		} else {
-			malus = Math.abs(length - this.preferredGroupSize);
+			malus = Math.abs(length - this.config.preferredGroupSize);
 		}
 		// else based on anything else
 		if (endIndex != sounds.length && !sounds[endIndex - 1].isValidEnd()) {
@@ -127,7 +126,7 @@ public class WordGrouper {
 	}
 
 	public int getPreferredGroupSize() {
-		return this.preferredGroupSize;
+		return this.config.getPreferredGroupSize();
 	}
 
 	public WordGrouper preferredGroupSize(int newPreferredGroupSize) {
@@ -136,12 +135,12 @@ public class WordGrouper {
 	}
 
 	public void setPreferredGroupSize(int preferredGroupSize) {
-		this.preferredGroupSize = preferredGroupSize;
+		this.config.setPreferredGroupSize(preferredGroupSize);
 		recalculatePreferredIndexMap();
 	}
 
 	public int getMaxGroupSize() {
-		return this.maxGroupSize;
+		return this.config.getMaxGroupSize();
 	}
 
 	public WordGrouper maxGroupSize(int newMaxGroupSize) {
@@ -150,12 +149,12 @@ public class WordGrouper {
 	}
 
 	public void setMaxGroupSize(int maxGroupSize) {
-		this.maxGroupSize = maxGroupSize;
+		this.config.setMaxGroupSize(maxGroupSize);
 		recalculatePreferredIndexMap();
 	}
 
 	public int getMinGroupSize() {
-		return this.minGroupSize;
+		return this.config.getMinGroupSize();
 	}
 
 	public WordGrouper minGroupSize(int newMinGroupSize) {
@@ -164,14 +163,28 @@ public class WordGrouper {
 	}
 
 	public void setMinGroupSize(int minGroupSize) {
-		this.minGroupSize = minGroupSize;
+		this.config.setMinGroupSize(minGroupSize);
+		recalculatePreferredIndexMap();
+	}
+
+	public WordGrouperConfig getConfig() {
+		return this.config;
+	}
+
+	public WordGrouper config(WordGrouperConfig newConfig) {
+		setConfig(newConfig);
+		return this;
+	}
+
+	public void setConfig(WordGrouperConfig config) {
+		Objects.requireNonNull(config);
+		this.config = config;
 		recalculatePreferredIndexMap();
 	}
 
 	@Override
 	public String toString() {
-		return "WordGrouper [preferredGroupSize=" + this.preferredGroupSize + ", minGroupSize=" + this.minGroupSize
-				+ ", maxGroupSize=" + this.maxGroupSize + "]";
+		return "WordGrouper [config=" + this.config + "]";
 	}
 
 	/**

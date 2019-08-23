@@ -8,12 +8,14 @@ import javax.swing.JPanel;
 
 import de.slothsoft.shera.Word;
 import de.slothsoft.shera.dc.WordPainter;
+import de.slothsoft.shera.dc.WordPainterConfig;
 
 public class WordControl extends JPanel {
 
 	private static final long serialVersionUID = -3185479415430023317L;
 
 	Word[] content;
+	WordPainterConfig config = new WordPainterConfig();
 
 	public WordControl() {
 		setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
@@ -35,8 +37,10 @@ public class WordControl extends JPanel {
 			canvas.setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 			canvas.setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 			canvas.translate(2, 2);
+			canvas.setSize(new int[]{getWidth(), getHeight()});
 
 			final WordPainter painter = new WordPainter(canvas);
+			painter.setConfig(this.config);
 			painter.paintWords(this.content);
 		}
 	}
@@ -53,6 +57,19 @@ public class WordControl extends JPanel {
 	public void setContent(Word[] content) {
 		this.content = Objects.requireNonNull(content);
 		repaint();
+	}
+
+	public WordPainterConfig getConfig() {
+		return this.config;
+	}
+
+	public WordControl config(WordPainterConfig newConfig) {
+		setConfig(newConfig);
+		return this;
+	}
+
+	public void setConfig(WordPainterConfig config) {
+		this.config = Objects.requireNonNull(config);
 	}
 
 }

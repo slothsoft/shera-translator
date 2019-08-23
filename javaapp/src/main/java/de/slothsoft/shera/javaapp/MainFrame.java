@@ -205,6 +205,7 @@ public class MainFrame extends JFrame {
 		final WordSpliterator spliterator = new WordSpliterator(this.inputControl.getSelectedSoundMapper());
 		this.singleSoundsControl.setContent(spliterator.splitIntoSounds(this.inputControl.getContent()));
 		this.wordControl.setContent(spliterator.splitIntoWords(this.inputControl.getContent()));
+		this.wordControl.setConfig(this.inputControl.getSelectedWordPainterConfig());
 	}
 
 	private void hookListeners() {

@@ -13,7 +13,7 @@ public class Word {
 	PhoneticSound[] content;
 	int[] groupSeparatorIndexes;
 
-	public Word(PhoneticSound[] content) {
+	public Word(PhoneticSound... content) {
 		setContent(content);
 	}
 
@@ -28,6 +28,45 @@ public class Word {
 
 	public void setContent(PhoneticSound[] content) {
 		this.content = content;
+	}
+
+	/**
+	 * @since 0.4.0
+	 */
+
+	public int getGroupCount() {
+		return isIndexArrayBlank() ? 1 : this.groupSeparatorIndexes.length + 1;
+	}
+
+	private boolean isIndexArrayBlank() {
+		return this.groupSeparatorIndexes == null || this.groupSeparatorIndexes.length == 0;
+	}
+
+	/**
+	 * @since 0.4.0
+	 */
+
+	public PhoneticSound[] generateGroup(int group) {
+		if (group < 0) throw new IllegalArgumentException("Group index must be postive!");
+		if (isIndexArrayBlank()) {
+			if (group > 0)
+				throw new IllegalArgumentException("There is only 1 group, so index " + group + " was not found!");
+			return this.content;
+		}
+
+		final int groupCount = getGroupCount();
+		if (group >= groupCount)
+			throw new IllegalArgumentException(
+					"There are only " + groupCount + " groups, so index " + group + " was not found!");
+
+		final int startIndex = group == 0 ? 0 : this.groupSeparatorIndexes[group - 1];
+		final int endIndex = group == groupCount - 1 ? this.content.length : this.groupSeparatorIndexes[group];
+		final int resultLength = endIndex - startIndex;
+		final PhoneticSound[] result = new PhoneticSound[resultLength];
+		for (int i = startIndex; i < endIndex; i++) {
+			result[i - startIndex] = this.content[i];
+		}
+		return result;
 	}
 
 	/**

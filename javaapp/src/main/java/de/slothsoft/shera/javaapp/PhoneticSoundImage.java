@@ -40,13 +40,16 @@ public class PhoneticSoundImage extends JLabel {
 			final NextDrawing nextDrawing = sound
 					.drawOn(new DrawingContext(new LogCanvas()).width(nettoSymbolSize).height(nettoSymbolSize));
 
-			graphics.translate(border - nextDrawing.getStartPointX(),
-					border + ((nettoSymbolSize - nextDrawing.getStartPointY()) / 2));
+			final int translateX = border - nextDrawing.getStartPointX();
+			final int translateY = border + ((nettoSymbolSize - nextDrawing.getStartPointY()) / 2);
+			graphics.translate(translateX, translateY);
 
 			final SwingCanvas canvas = new SwingCanvas(graphics);
 			canvas.setBackground(SheRaJavaApp.COLOR_SCRIPT_BACKGROUND);
 			canvas.setForeground(SheRaJavaApp.COLOR_SCRIPT_FOREGROUND);
 			sound.drawOn(new DrawingContext(canvas).width(nettoSymbolSize).height(nettoSymbolSize));
+
+			graphics.translate(-translateX, -translateY);
 		}
 	}
 
